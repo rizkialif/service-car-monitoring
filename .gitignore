@@ -1,0 +1,15 @@
+# Folder agents
+.agents/
+agents/
+
+# Google Apps Script / Backend (Jangan dipush ke repo frontend)
+*.gs
+API_Code.gs
+API_Code copy.gs
+api_code copy.gs
+BACKUPcode.gs
+backupcode.gs
+
+# File backup HTML
+index copy.html
+index_dari_google_script.html
