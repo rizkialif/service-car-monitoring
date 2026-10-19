@@ -268,6 +268,37 @@
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL POPUP KONFIRMASI HAPUS GLOBAL (GLOBAL DELETE CONFIRMATION MODAL)   -->
+  <!-- ========================================================================= -->
+  <div id="globalDeleteModal" onclick="if(event.target === this) closeGlobalDeleteModal(false)"
+    class="hidden fixed inset-0 z-[70] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col">
+      <div class="p-5 sm:p-6 text-center">
+        <div
+          class="w-14 h-14 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3 id="globalDeleteTitle" class="text-base sm:text-lg font-bold text-slate-900">Konfirmasi Hapus</h3>
+        <p id="globalDeleteMessage" class="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
+          Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+      <div
+        class="px-5 py-3.5 sm:px-6 sm:py-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2.5">
+        <button id="globalDeleteCancelBtn" onclick="closeGlobalDeleteModal(false)"
+          class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 text-xs font-semibold hover:bg-slate-100 transition">
+          Batal
+        </button>
+        <button id="globalDeleteConfirmBtn" onclick="confirmGlobalDelete()"
+          class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow transition flex items-center gap-1.5">
+          <i class="fa-solid fa-trash-can"></i>
+          <span id="globalDeleteConfirmText">Ya, Hapus</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
 
 
   <!-- ========================================================================= -->
@@ -428,27 +459,6 @@
           <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Masuk Aplikasi
         </button>
 
-        <div class="pt-3 border-t border-slate-100">
-          <p class="text-xs text-slate-500 font-semibold mb-2">Pintasan Akun Default (Klik untuk Uji Role):</p>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
-            <button onclick="fillDemo('admin','admin123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">Admin
-              User</button>
-            <button onclick="fillDemo('manager','manager123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">Manager</button>
-            <button onclick="fillDemo('sa','sa123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">SA</button>
-            <button onclick="fillDemo('mekanik','mekanik123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">Mekanik</button>
-            <button onclick="fillDemo('partman','part123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">Partman</button>
-            <button onclick="fillDemo('qc','qc123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium">QualityCheck</button>
-            <button onclick="fillDemo('washer','wash123')"
-              class="bg-slate-100 hover:bg-blue-50 text-slate-700 py-1.5 px-2 rounded border border-slate-200 font-medium col-span-2 sm:col-span-3">Washer
-              (Cuci Mobil)</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -1014,9 +1024,36 @@
       setTimeout(() => t.classList.add('hidden'), 3500);
     }
 
-    function fillDemo(u, p) {
-      document.getElementById('loginUsername').value = u;
-      document.getElementById('loginPassword').value = p;
+    // =========================================================================
+    // MODAL KONFIRMASI HAPUS GLOBAL (REUSABLE / PROMISE-BASED)
+    // =========================================================================
+    let globalDeleteResolve = null;
+
+    function showDeleteConfirm({
+      title = 'Konfirmasi Hapus',
+      message = 'Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.',
+      confirmText = 'Ya, Hapus'
+    } = {}) {
+      document.getElementById('globalDeleteTitle').textContent = title;
+      document.getElementById('globalDeleteMessage').textContent = message;
+      document.getElementById('globalDeleteConfirmText').textContent = confirmText;
+      document.getElementById('globalDeleteModal').classList.remove('hidden');
+
+      return new Promise((resolve) => {
+        globalDeleteResolve = resolve;
+      });
+    }
+
+    function closeGlobalDeleteModal(confirmed = false) {
+      document.getElementById('globalDeleteModal').classList.add('hidden');
+      if (globalDeleteResolve) {
+        globalDeleteResolve(confirmed);
+        globalDeleteResolve = null;
+      }
+    }
+
+    function confirmGlobalDelete() {
+      closeGlobalDeleteModal(true);
     }
 
     // =========================================================================
@@ -1632,15 +1669,18 @@
       }
     }
 
-    function handleDeleteOrder(orderId, plateNumber) {
+    async function handleDeleteOrder(orderId, plateNumber) {
       if (!currentUser || currentUser.role !== 'SA') {
         showToast('Akses Ditolak: Hanya Service Advisor (SA) yang dapat menghapus Work Order!');
         return;
       }
 
-      if (!confirm('Yakin ingin menghapus permanen Work Order "' + orderId + '" (' + plateNumber + ')?\nData yang dihapus tidak dapat dipulihkan.')) {
-        return;
-      }
+      const confirmed = await showDeleteConfirm({
+        title: 'Hapus Work Order',
+        message: `Yakin ingin menghapus permanen Work Order "${orderId}" (${plateNumber})? Seluruh riwayat order ini akan dihapus dan tidak dapat dipulihkan.`,
+        confirmText: 'Hapus Order'
+      });
+      if (!confirmed) return;
 
       showLoading('Menghapus Work Order...');
       google.script.run
@@ -1869,7 +1909,17 @@
       renderTempPartListInModal();
     }
 
-    function removePartItemFromTempList(index) {
+    async function removePartItemFromTempList(index) {
+      const item = tempPartList[index];
+      const itemName = item ? item.partName : 'suku cadang ini';
+
+      const confirmed = await showDeleteConfirm({
+        title: 'Hapus Item Suku Cadang',
+        message: `Hapus "${itemName}" dari daftar pergantian suku cadang?`,
+        confirmText: 'Hapus Item'
+      });
+      if (!confirmed) return;
+
       tempPartList.splice(index, 1);
       renderTempPartListInModal();
     }
@@ -2393,8 +2443,14 @@
         .toggleUserAccountStatus(username);
     }
 
-    function handleDeleteUser(username) {
-      if (!confirm('Yakin ingin menghapus permanen akun "' + username + '"?')) return;
+    async function handleDeleteUser(username) {
+      const confirmed = await showDeleteConfirm({
+        title: 'Hapus Akun Karyawan',
+        message: `Yakin ingin menghapus permanen akun "${username}"? Akun yang dihapus tidak dapat login kembali.`,
+        confirmText: 'Hapus Akun'
+      });
+      if (!confirmed) return;
+
       showLoading('Menghapus Akun...');
       google.script.run
         .withSuccessHandler(res => {
