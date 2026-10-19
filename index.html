@@ -160,7 +160,95 @@
 
 
   <!-- ========================================================================= -->
-  <!-- MODAL POPUP CREATE / EDIT SERVICE ORDER (KHUSUS SA)                       -->
+  <!-- MODAL OVERRIDE STATUS (KHUSUS ADMINISTRATOR & SA)                         -->
+  <!-- ========================================================================= -->
+  <div id="overrideStatusModal"
+    class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col">
+      <div class="bg-purple-900 text-white px-5 py-4 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-purple-700/60 flex items-center justify-center text-purple-200">
+            <i class="fa-solid fa-arrows-rotate text-base"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm sm:text-base">Override Status Workflow</h3>
+            <p class="text-[11px] sm:text-xs text-purple-200">Khusus Administrator & Service Advisor</p>
+          </div>
+        </div>
+        <button onclick="closeOverrideStatusModal()" class="text-purple-300 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 space-y-4">
+        <!-- Info Kendaraan -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Order ID:</span>
+            <span id="overrideOrderId" class="font-mono font-bold text-slate-800">-</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Kendaraan:</span>
+            <span id="overrideVehicle" class="font-semibold text-slate-800">-</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-slate-500">Status Saat Ini:</span>
+            <span id="overrideCurrentStatus" class="font-bold px-2 py-0.5 rounded text-[11px]">-</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-700 mb-1.5">
+            Pilih Status Baru (Target Alur) *
+          </label>
+          <select id="overrideNewStatus"
+            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-800 bg-white focus:ring-2 focus:ring-purple-500 focus:outline-none">
+            <option value="Waiting">1. Waiting (Menunggu Antrian)</option>
+            <option value="In Progress">2. In Progress (Sedang Dikerjakan Mekanik)</option>
+            <option value="Waiting Part">3. Waiting Part (Proses Pergantian Part)</option>
+            <option value="Ready for QC">4. Ready for QC (Siap Pemeriksaan QC)</option>
+            <option value="Quality Check">5. Quality Check (Sedang Diperiksa QC)</option>
+            <option value="Ready for Wash">6. Ready for Wash (Siap Cuci Mobil)</option>
+            <option value="Washing">7. Washing (Proses Pencucian Mobil)</option>
+            <option value="Completed">8. Completed (Selesai / Siap Diambil)</option>
+          </select>
+          <p class="text-[11px] text-slate-500 mt-1">Status akan diubah seketika dan membuka kembali tahapan terkait
+            bagi staf.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase text-slate-700 mb-1.5">
+            Alasan Override / Catatan (Opsional)
+          </label>
+          <input id="overrideReason" type="text"
+            placeholder="Contoh: Salah klik tombol selesai oleh mekanik / revisi alur"
+            class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm bg-white focus:ring-2 focus:ring-purple-500 focus:outline-none">
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 flex items-center gap-2">
+          <input type="checkbox" id="overrideResetMechanic"
+            class="rounded text-purple-600 focus:ring-purple-500 h-4 w-4">
+          <label for="overrideResetMechanic" class="text-xs text-slate-600 cursor-pointer">
+            Kosongkan kembali nama mekanik (jika dikembalikan ke antrian <em>Waiting</em>)
+          </label>
+        </div>
+      </div>
+
+      <div class="px-5 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-end gap-2.5 shrink-0">
+        <button onclick="closeOverrideStatusModal()"
+          class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 text-xs font-semibold hover:bg-slate-100">
+          Batal
+        </button>
+        <button onclick="submitOverrideStatus()"
+          class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+          <i class="fa-solid fa-arrows-rotate"></i> Terapkan Override Status
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL POPUP CREATE / EDIT SERVICE ORDER (KHUSUS SA & ADMIN)               -->
   <!-- ========================================================================= -->
   <div id="serviceOrderModal"
     class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
@@ -199,14 +287,14 @@
           </div>
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp / Telepon</label>
-            <input id="fPhone" type="tel" inputmode="numeric" maxlength="16" placeholder="Contoh: 081234567890 (10-16 angka)"
+            <input id="fPhone" type="tel" inputmode="numeric" maxlength="16"
+              placeholder="Contoh: 081234567890 (10-16 angka)"
               oninput="this.value = this.value.replace(/\D/g, '').slice(0, 16)"
               class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
           <div class="md:col-span-2">
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Kilometer (Odometer)</label>
-            <input id="fMileage" type="text" placeholder="Contoh: 10.000 KM"
-              oninput="handleMileageInput(this)"
+            <input id="fMileage" type="text" placeholder="Contoh: 10.000 KM" oninput="handleMileageInput(this)"
               class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
         </div>
@@ -254,6 +342,25 @@
             *</label>
           <textarea id="fComplaint" rows="3" placeholder="Tuliskan keluhan customer secara detail..."
             class="w-full px-3.5 py-2 border rounded-lg text-sm"></textarea>
+        </div>
+
+        <div id="fStatusContainer" class="hidden p-3 bg-purple-50 rounded-xl border border-purple-200">
+          <label class="block text-xs font-semibold uppercase text-purple-900 mb-1">
+            <i class="fa-solid fa-arrows-rotate mr-1"></i> Status Workflow (Override Status)
+          </label>
+          <select id="fStatus"
+            class="w-full px-3.5 py-2 border border-purple-300 rounded-lg text-sm bg-white font-semibold text-slate-800 focus:ring-2 focus:ring-purple-500 focus:outline-none">
+            <option value="Waiting">Waiting (Menunggu Antrian)</option>
+            <option value="In Progress">In Progress (Sedang Dikerjakan Mekanik)</option>
+            <option value="Waiting Part">Waiting Part (Proses Pergantian Part)</option>
+            <option value="Ready for QC">Ready for QC (Siap Pemeriksaan QC)</option>
+            <option value="Quality Check">Quality Check (Sedang Diperiksa QC)</option>
+            <option value="Ready for Wash">Ready for Wash (Siap Cuci Mobil)</option>
+            <option value="Washing">Washing (Proses Pencucian Mobil)</option>
+            <option value="Completed">Completed (Selesai / Siap Diambil)</option>
+          </select>
+          <p class="text-[11px] text-purple-700 mt-1">Ubah status ini jika perlu membatalkan/mengembalikan tahap
+            pengerjaan (rollback).</p>
         </div>
       </div>
 
@@ -1308,7 +1415,7 @@
             currentUser = res.user;
             // Simpan session ke localStorage agar tahan terhadap Refresh halaman
             localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(currentUser));
-            
+
             // Reset form username & password setelah berhasil login
             document.getElementById('loginUsername').value = '';
             document.getElementById('loginPassword').value = '';
@@ -1365,6 +1472,7 @@
         document.getElementById('nav-reports').classList.remove('hidden');
         document.getElementById('nav-users').classList.remove('hidden');
       } else if (role === 'Administrator') {
+        document.getElementById('nav-create').classList.remove('hidden');
         document.getElementById('nav-users').classList.remove('hidden');
         document.getElementById('nav-reports').classList.remove('hidden');
       } else if (role === 'SA') {
@@ -1472,6 +1580,8 @@
           </div>
         ` : '';
 
+        const isSaOrAdmin = currentUser && (currentUser.role === 'SA' || currentUser.role === 'Administrator');
+
         return `
           <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-sm flex flex-col justify-between space-y-3.5 sm:space-y-4">
             <div>
@@ -1505,7 +1615,14 @@
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <span>Mekanik: <strong>${o.mechanicName || 'Belum diklaim'}</strong></span>
-              <span class="font-mono">${o.orderId}</span>
+              <div class="flex items-center gap-2">
+                ${isSaOrAdmin ? `
+                  <button onclick="openOverrideStatusModal('${o.orderId}')" title="Override Status Workflow" class="text-[11px] px-2 py-0.5 rounded border border-purple-200 bg-purple-50 text-purple-700 hover:bg-purple-100 font-semibold transition flex items-center gap-1 shadow-2xs">
+                    <i class="fa-solid fa-arrows-rotate"></i> Override
+                  </button>
+                ` : ''}
+                <span class="font-mono">${o.orderId}</span>
+              </div>
             </div>
           </div>
         `;
@@ -1533,7 +1650,7 @@
         return;
       }
 
-      const isSa = currentUser && currentUser.role === 'SA';
+      const isSaOrAdmin = currentUser && (currentUser.role === 'SA' || currentUser.role === 'Administrator');
 
       tbody.innerHTML = filtered.map(o => {
         const info = getStatusBadgeInfo(o.status);
@@ -1541,17 +1658,20 @@
           `<span class="inline-block bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded text-[10px] font-medium mr-1 mb-1">${escapeHtml(g)}</span>`
         ).join('');
 
-        const actionButtons = isSa ? `
+        const actionButtons = isSaOrAdmin ? `
           <div class="flex items-center justify-center gap-1.5">
             <button onclick="openServiceOrderModal('edit', '${o.orderId}')" title="Edit Work Order" class="px-2.5 py-1.5 rounded-lg border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs font-semibold flex items-center gap-1 transition shadow-xs">
               <i class="fa-solid fa-pen-to-square"></i> Edit
+            </button>
+            <button onclick="openOverrideStatusModal('${o.orderId}')" title="Override Status Manual" class="px-2.5 py-1.5 rounded-lg border border-purple-200 bg-purple-50 text-purple-700 hover:bg-purple-100 text-xs font-semibold flex items-center gap-1 transition shadow-xs">
+              <i class="fa-solid fa-arrows-rotate"></i> Status
             </button>
             <button onclick="handleDeleteOrder('${o.orderId}', '${escapeHtml(o.plateNumber)}')" title="Hapus Work Order" class="px-2.5 py-1.5 rounded-lg border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-semibold flex items-center gap-1 transition shadow-xs">
               <i class="fa-solid fa-trash-can"></i> Hapus
             </button>
           </div>
         ` : `
-          <span class="text-xs text-slate-400 font-medium">Hanya SA</span>
+          <span class="text-xs text-slate-400 font-medium">Hanya SA / Admin</span>
         `;
 
         return `
@@ -1607,12 +1727,12 @@
       const cursorPos = formatted.length;
       try {
         el.setSelectionRange(cursorPos, cursorPos);
-      } catch (e) {}
+      } catch (e) { }
     }
 
     function openServiceOrderModal(mode, orderId = null) {
-      if (!currentUser || currentUser.role !== 'SA') {
-        showToast('Akses Ditolak: Hanya Service Advisor (SA) yang dapat mengelola Service Order!');
+      if (!currentUser || (currentUser.role !== 'SA' && currentUser.role !== 'Administrator')) {
+        showToast('Akses Ditolak: Hanya Service Advisor (SA) dan Administrator yang dapat mengelola Service Order!', false);
         return;
       }
 
@@ -1622,16 +1742,17 @@
       const subEl = document.getElementById('serviceOrderModalSub');
       const btnTextEl = document.getElementById('btnSaveOrderText');
       const btnIconEl = document.getElementById('btnSaveOrderIcon');
+      const statusContainer = document.getElementById('fStatusContainer');
 
       if (mode === 'edit' && orderId) {
         const order = allOrders.find(o => o.orderId === orderId);
         if (!order) {
-          showToast('Data order tidak ditemukan!');
+          showToast('Data order tidak ditemukan!', false);
           return;
         }
 
         titleEl.textContent = 'Edit Work Order (' + orderId + ')';
-        subEl.textContent = 'Perbarui data kendaraan, checklist barang, atau keluhan customer';
+        subEl.textContent = 'Perbarui data kendaraan, checklist barang, atau status pengerjaan';
         btnTextEl.textContent = 'Simpan Perubahan';
         btnIconEl.className = 'fa-solid fa-floppy-disk';
 
@@ -1644,6 +1765,11 @@
         document.getElementById('fValuables').value = (order.valuablesNote === '-' ? '' : order.valuablesNote) || '';
         document.getElementById('fComplaint').value = order.complaint || '';
 
+        if (statusContainer) {
+          statusContainer.classList.remove('hidden');
+          document.getElementById('fStatus').value = order.status;
+        }
+
         const currentGoods = order.carGoods || [];
         document.querySelectorAll('#carGoodsCheckboxes input').forEach(cb => {
           cb.checked = currentGoods.includes(cb.value);
@@ -1653,6 +1779,10 @@
         subEl.textContent = 'Khusus Service Advisor (SA) — Registrasi kendaraan & keluhan customer';
         btnTextEl.textContent = 'Buat Work Order';
         btnIconEl.className = 'fa-solid fa-paper-plane';
+
+        if (statusContainer) {
+          statusContainer.classList.add('hidden');
+        }
 
         document.getElementById('fPlate').value = '';
         document.getElementById('fCarModel').value = '';
@@ -1677,8 +1807,8 @@
     }
 
     function saveServiceOrderForm() {
-      if (!currentUser || currentUser.role !== 'SA') {
-        showToast('Akses Ditolak: Hanya Service Advisor (SA) yang boleh mengelola Service Order!');
+      if (!currentUser || (currentUser.role !== 'SA' && currentUser.role !== 'Administrator')) {
+        showToast('Akses Ditolak: Hanya Service Advisor (SA) dan Administrator yang boleh mengelola Service Order!', false);
         return;
       }
 
@@ -1690,32 +1820,32 @@
       const complaint = document.getElementById('fComplaint').value.trim();
 
       if (!plateNumber || !carModel || !customerName || !complaint) {
-        showToast('Mohon lengkapi No. Polisi, Model Mobil, Nama Customer, dan Keluhan!');
+        showToast('Mohon lengkapi No. Polisi, Model Mobil, Nama Customer, dan Keluhan!', false);
         return;
       }
 
       // Validasi 1: Nomor polisi hanya bisa huruf, angka, dan spasi
       if (!/^[a-zA-Z0-9\s]+$/.test(plateNumber)) {
-        showToast('Nomor Polisi hanya boleh berisi huruf, angka, dan spasi!');
+        showToast('Nomor Polisi hanya boleh berisi huruf, angka, dan spasi!', false);
         return;
       }
 
       // Validasi 2: Tipe / model mobil hanya bisa huruf, angka, dan spasi
       if (!/^[a-zA-Z0-9\s]+$/.test(carModel)) {
-        showToast('Tipe/Model Mobil hanya boleh berisi huruf, angka, dan spasi!');
+        showToast('Tipe/Model Mobil hanya boleh berisi huruf, angka, dan spasi!', false);
         return;
       }
 
       // Validasi 3: Nama customer hanya bisa huruf dan spasi
       if (!/^[a-zA-Z\s]+$/.test(customerName)) {
-        showToast('Nama Customer hanya boleh berisi huruf dan spasi!');
+        showToast('Nama Customer hanya boleh berisi huruf dan spasi!', false);
         return;
       }
 
       // Validasi 4: Nomor WhatsApp hanya angka, min 10 max 16 digit (jika diisi)
       if (phone) {
         if (!/^\d+$/.test(phone) || phone.length < 10 || phone.length > 16) {
-          showToast('Nomor WhatsApp harus berupa angka dengan panjang 10 - 16 digit!');
+          showToast('Nomor WhatsApp harus berupa angka dengan panjang 10 - 16 digit!', false);
           return;
         }
       }
@@ -1738,18 +1868,23 @@
 
       if (editingOrderId) {
         payload.orderId = editingOrderId;
+        const fStatusEl = document.getElementById('fStatus');
+        if (fStatusEl) {
+          payload.status = fStatusEl.value;
+        }
+
         showLoading('Menyimpan Perubahan Work Order...');
         google.script.run
           .withSuccessHandler(res => {
             hideLoading();
             closeServiceOrderModal();
             allOrders = res.orders || [];
-            showToast('Work Order (' + payload.orderId + ') berhasil diperbarui!');
+            showToast('Work Order (' + payload.orderId + ') berhasil diperbarui!', true);
             renderAllViews();
           })
           .withFailureHandler(err => {
             hideLoading();
-            showToast('Gagal update: ' + err.message);
+            showToast('Gagal update: ' + err.message, false);
           })
           .updateServiceOrder(payload);
       } else {
@@ -1759,20 +1894,20 @@
             hideLoading();
             closeServiceOrderModal();
             allOrders = res.orders || [];
-            showToast('Work Order baru berhasil dibuat!');
+            showToast('Work Order baru berhasil dibuat!', true);
             renderAllViews();
           })
           .withFailureHandler(err => {
             hideLoading();
-            showToast('Gagal membuat order: ' + err.message);
+            showToast('Gagal membuat order: ' + err.message, false);
           })
           .createServiceOrder(payload);
       }
     }
 
     async function handleDeleteOrder(orderId, plateNumber) {
-      if (!currentUser || currentUser.role !== 'SA') {
-        showToast('Akses Ditolak: Hanya Service Advisor (SA) yang dapat menghapus Work Order!');
+      if (!currentUser || (currentUser.role !== 'SA' && currentUser.role !== 'Administrator')) {
+        showToast('Akses Ditolak: Hanya Service Advisor (SA) dan Administrator yang dapat menghapus Work Order!', false);
         return;
       }
 
@@ -1788,17 +1923,92 @@
         .withSuccessHandler(res => {
           hideLoading();
           allOrders = res.orders || [];
-          showToast('Work Order ' + orderId + ' berhasil dihapus.');
+          showToast('Work Order ' + orderId + ' berhasil dihapus.', true);
           renderAllViews();
         })
         .withFailureHandler(err => {
           hideLoading();
-          showToast('Gagal menghapus: ' + err.message);
+          showToast('Gagal menghapus: ' + err.message, false);
         })
         .deleteServiceOrder({
           orderId: orderId,
           userRole: currentUser.role
         });
+    }
+
+    // =========================================================================
+    // FITUR STATUS OVERRIDE KHUSUS ADMINISTRATOR & SERVICE ADVISOR (ROLLBACK)
+    // =========================================================================
+    let activeOverrideOrderId = null;
+
+    function openOverrideStatusModal(orderId) {
+      if (!currentUser || (currentUser.role !== 'SA' && currentUser.role !== 'Administrator')) {
+        showToast('Akses Ditolak: Hanya Service Advisor (SA) dan Administrator yang berhak melakukan Status Override!', false);
+        return;
+      }
+
+      const order = allOrders.find(o => o.orderId === orderId);
+      if (!order) {
+        showToast('Data order tidak ditemukan!', false);
+        return;
+      }
+
+      activeOverrideOrderId = orderId;
+      document.getElementById('overrideOrderId').textContent = order.orderId;
+      document.getElementById('overrideVehicle').textContent = `${order.plateNumber} - ${order.carModel} (${order.customerName})`;
+
+      const info = getStatusBadgeInfo(order.status);
+      const curStatusEl = document.getElementById('overrideCurrentStatus');
+      curStatusEl.textContent = info.text;
+      curStatusEl.className = `font-bold px-2 py-0.5 rounded text-[11px] border ${info.lightCls}`;
+
+      document.getElementById('overrideNewStatus').value = order.status;
+      document.getElementById('overrideReason').value = '';
+      document.getElementById('overrideResetMechanic').checked = false;
+
+      document.getElementById('overrideStatusModal').classList.remove('hidden');
+    }
+
+    function closeOverrideStatusModal() {
+      activeOverrideOrderId = null;
+      document.getElementById('overrideStatusModal').classList.add('hidden');
+    }
+
+    function submitOverrideStatus() {
+      if (!activeOverrideOrderId) return;
+      const newStatus = document.getElementById('overrideNewStatus').value;
+      const reason = document.getElementById('overrideReason').value.trim();
+      const resetMechanic = document.getElementById('overrideResetMechanic').checked;
+
+      const order = allOrders.find(o => o.orderId === activeOverrideOrderId);
+      if (order && order.status === newStatus) {
+        showToast('Status baru sama dengan status saat ini. Tidak ada perubahan.', false);
+        return;
+      }
+
+      const payload = {
+        orderId: activeOverrideOrderId,
+        newStatus: newStatus,
+        overrideReason: reason,
+        resetMechanic: resetMechanic,
+        userRole: currentUser.role,
+        userName: currentUser.fullName
+      };
+
+      showLoading('Mengubah Status Workflow (Override)...');
+      google.script.run
+        .withSuccessHandler(res => {
+          hideLoading();
+          closeOverrideStatusModal();
+          allOrders = res.orders || [];
+          showToast(`Status ${payload.orderId} berhasil di-override menjadi: ${newStatus}`, true);
+          renderAllViews();
+        })
+        .withFailureHandler(err => {
+          hideLoading();
+          showToast('Gagal override status: ' + err.message, false);
+        })
+        .overrideServiceStatus(payload);
     }
 
     // =========================================================================
