@@ -175,35 +175,32 @@
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nomor Polisi (Plat) *</label>
             <input id="fPlate" type="text" placeholder="Contoh: B 1234 XYZ"
+              oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '').toUpperCase()"
               class="w-full px-3.5 py-2 border rounded-lg text-sm uppercase">
           </div>
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Tipe / Model Mobil *</label>
             <input id="fCarModel" type="text" placeholder="Contoh: Toyota Innova Zenix"
+              oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s]/g, '')"
               class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Customer *</label>
             <input id="fCustomer" type="text" placeholder="Nama pemilik/pembawa mobil"
+              oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
               class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
           <div>
             <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">No. WhatsApp / Telepon</label>
-            <input id="fPhone" type="text" placeholder="0812xxxx" class="w-full px-3.5 py-2 border rounded-lg text-sm">
-          </div>
-          <div>
-            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Kilometer (Odometer)</label>
-            <input id="fMileage" type="text" placeholder="Contoh: 25.400 KM"
+            <input id="fPhone" type="tel" inputmode="numeric" maxlength="16" placeholder="Contoh: 081234567890 (10-16 angka)"
+              oninput="this.value = this.value.replace(/\D/g, '').slice(0, 16)"
               class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
-          <div>
-            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Sisa BBM</label>
-            <select id="fFuel" class="w-full px-3.5 py-2 border rounded-lg text-sm bg-white">
-              <option value="25%">25% (Seperempat)</option>
-              <option value="50%" selected>50% (Setengah)</option>
-              <option value="75%">75% (Tiga Perempat)</option>
-              <option value="100%">100% (Penuh)</option>
-            </select>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Kilometer (Odometer)</label>
+            <input id="fMileage" type="text" placeholder="Contoh: 10.000 KM"
+              oninput="handleMileageInput(this)"
+              class="w-full px-3.5 py-2 border rounded-lg text-sm">
           </div>
         </div>
 
@@ -1536,6 +1533,27 @@
       }).join('');
     }
 
+    function handleMileageInput(el) {
+      if (!el) return;
+      const rawDigits = el.value.replace(/\D/g, '');
+      if (!rawDigits) {
+        el.value = '';
+        return;
+      }
+      const num = parseInt(rawDigits, 10);
+      if (isNaN(num)) {
+        el.value = '';
+        return;
+      }
+      const formatted = num.toLocaleString('id-ID');
+      el.value = formatted + ' KM';
+
+      const cursorPos = formatted.length;
+      try {
+        el.setSelectionRange(cursorPos, cursorPos);
+      } catch (e) {}
+    }
+
     function openServiceOrderModal(mode, orderId = null) {
       if (!currentUser || currentUser.role !== 'SA') {
         showToast('Akses Ditolak: Hanya Service Advisor (SA) yang dapat mengelola Service Order!');
@@ -1566,7 +1584,7 @@
         document.getElementById('fCustomer').value = order.customerName || '';
         document.getElementById('fPhone').value = order.phone || '';
         document.getElementById('fMileage').value = order.mileage || '';
-        document.getElementById('fFuel').value = order.fuelLevel || '50%';
+        handleMileageInput(document.getElementById('fMileage'));
         document.getElementById('fValuables').value = (order.valuablesNote === '-' ? '' : order.valuablesNote) || '';
         document.getElementById('fComplaint').value = order.complaint || '';
 
@@ -1585,7 +1603,6 @@
         document.getElementById('fCustomer').value = '';
         document.getElementById('fPhone').value = '';
         document.getElementById('fMileage').value = '';
-        document.getElementById('fFuel').value = '50%';
         document.getElementById('fValuables').value = '';
         document.getElementById('fComplaint').value = '';
 
@@ -1612,11 +1629,39 @@
       const plateNumber = document.getElementById('fPlate').value.trim();
       const carModel = document.getElementById('fCarModel').value.trim();
       const customerName = document.getElementById('fCustomer').value.trim();
+      const phone = document.getElementById('fPhone').value.trim();
+      const mileage = document.getElementById('fMileage').value.trim();
       const complaint = document.getElementById('fComplaint').value.trim();
 
       if (!plateNumber || !carModel || !customerName || !complaint) {
         showToast('Mohon lengkapi No. Polisi, Model Mobil, Nama Customer, dan Keluhan!');
         return;
+      }
+
+      // Validasi 1: Nomor polisi hanya bisa huruf, angka, dan spasi
+      if (!/^[a-zA-Z0-9\s]+$/.test(plateNumber)) {
+        showToast('Nomor Polisi hanya boleh berisi huruf, angka, dan spasi!');
+        return;
+      }
+
+      // Validasi 2: Tipe / model mobil hanya bisa huruf, angka, dan spasi
+      if (!/^[a-zA-Z0-9\s]+$/.test(carModel)) {
+        showToast('Tipe/Model Mobil hanya boleh berisi huruf, angka, dan spasi!');
+        return;
+      }
+
+      // Validasi 3: Nama customer hanya bisa huruf dan spasi
+      if (!/^[a-zA-Z\s]+$/.test(customerName)) {
+        showToast('Nama Customer hanya boleh berisi huruf dan spasi!');
+        return;
+      }
+
+      // Validasi 4: Nomor WhatsApp hanya angka, min 10 max 16 digit (jika diisi)
+      if (phone) {
+        if (!/^\d+$/.test(phone) || phone.length < 10 || phone.length > 16) {
+          showToast('Nomor WhatsApp harus berupa angka dengan panjang 10 - 16 digit!');
+          return;
+        }
       }
 
       const checkedGoods = Array.from(document.querySelectorAll('#carGoodsCheckboxes input:checked')).map(cb => cb.value);
@@ -1626,9 +1671,9 @@
         plateNumber,
         carModel,
         customerName,
-        phone: document.getElementById('fPhone').value.trim(),
-        mileage: document.getElementById('fMileage').value.trim(),
-        fuelLevel: document.getElementById('fFuel').value,
+        phone,
+        mileage,
+        fuelLevel: '-',
         carGoods: checkedGoods,
         valuablesNote: document.getElementById('fValuables').value.trim(),
         complaint,
