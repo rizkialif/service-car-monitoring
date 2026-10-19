@@ -887,8 +887,7 @@
         <div
           class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-200/70 px-4 py-2.5 rounded-xl">
           <div class="text-xs font-semibold text-slate-700">
-            Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Semua Riwayat
-              Service</span>
+            Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Laporan Harian (Hari Ini)</span>
           </div>
           <button onclick="applyReportFilter('all')"
             class="text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-300 w-fit">
@@ -1033,7 +1032,7 @@
     let allUsers = [];
     let tvRefreshTimer = null;
     let isFetchingTv = false;
-    let currentReportFilterMode = 'all';
+    let currentReportFilterMode = 'daily';
 
     // State Modal Partman
     let activePartOrderId = null;
@@ -1517,6 +1516,12 @@
             : 'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800';
         }
       });
+
+      if (tabName === 'reports') {
+        initDefaultReportDates();
+        currentReportFilterMode = 'daily';
+        renderReports();
+      }
     }
 
     function refreshServerData(withLoader = false) {
@@ -2542,14 +2547,19 @@
     // POIN 4 & 5: FILTER HARIAN vs BULANAN & DOWNLOAD EXCEL (.XLS) RAPI
     // =========================================================================
     function getFilteredOrdersByMode(mode) {
-      const dailyDate = document.getElementById('filterDailyDate').value;
-      const monthlyMonth = document.getElementById('filterMonthlyMonth').value;
+      initDefaultReportDates();
+      const dailyInput = document.getElementById('filterDailyDate');
+      const monthlyInput = document.getElementById('filterMonthlyMonth');
+      const dailyDate = dailyInput ? dailyInput.value : '';
+      const monthlyMonth = monthlyInput ? monthlyInput.value : '';
 
-      if (mode === 'daily' && dailyDate) {
-        return allOrders.filter(o => String(o.createdAt).slice(0, 10) === dailyDate);
+      if (mode === 'daily') {
+        if (!dailyDate) return allOrders;
+        return allOrders.filter(o => String(o.createdAt || '').slice(0, 10) === dailyDate);
       }
-      if (mode === 'monthly' && monthlyMonth) {
-        return allOrders.filter(o => String(o.createdAt).slice(0, 7) === monthlyMonth);
+      if (mode === 'monthly') {
+        if (!monthlyMonth) return allOrders;
+        return allOrders.filter(o => String(o.createdAt || '').slice(0, 7) === monthlyMonth);
       }
       return allOrders;
     }
@@ -2560,8 +2570,11 @@
     }
 
     function renderReports() {
-      const dailyDate = document.getElementById('filterDailyDate').value;
-      const monthlyMonth = document.getElementById('filterMonthlyMonth').value;
+      initDefaultReportDates();
+      const dailyInput = document.getElementById('filterDailyDate');
+      const monthlyInput = document.getElementById('filterMonthlyMonth');
+      const dailyDate = dailyInput ? dailyInput.value : '';
+      const monthlyMonth = monthlyInput ? monthlyInput.value : '';
 
       const dailyOrders = getFilteredOrdersByMode('daily');
       const monthlyOrders = getFilteredOrdersByMode('monthly');
