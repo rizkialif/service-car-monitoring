@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JPCB - Cherry Arta Kranji</title>
+  <link rel="icon" type="image/png" href="image/Chery-Logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <style>
@@ -32,6 +33,37 @@
 
     .animate-pulse-soft {
       animation: pulse-soft 1.8s infinite;
+    }
+
+    /* ASDP-Style Mini-Sidebar Smooth Transition */
+    #appSidebar {
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @media (min-width: 768px) {
+      #appSidebar.sidebar-mini {
+        width: 5rem !important; /* 80px */
+      }
+      #appSidebar.sidebar-mini .brand-info,
+      #appSidebar.sidebar-mini .nav-text,
+      #appSidebar.sidebar-mini .menu-category-title,
+      #appSidebar.sidebar-mini .tv-title,
+      #appSidebar.sidebar-mini .user-details {
+        display: none !important;
+      }
+      #appSidebar.sidebar-mini .sidebar-header {
+        justify-content: center !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+      }
+      #appSidebar.sidebar-mini .nav-btn,
+      #appSidebar.sidebar-mini .tv-btn {
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      #appSidebar.sidebar-mini .user-box-inner {
+        justify-content: center !important;
+      }
     }
   </style>
 </head>
@@ -423,8 +455,8 @@
         class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-700/80 pb-4 mb-4 sm:mb-6">
         <div class="flex items-start sm:items-center gap-3 sm:gap-4">
           <div
-            class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0">
-            <i class="fa-solid fa-car-tunnel text-xl sm:text-2xl text-white"></i>
+            class="px-3.5 py-2 rounded-2xl bg-slate-800/90 border border-slate-700/80 shadow-lg shadow-blue-950/40 flex items-center justify-center shrink-0">
+            <img src="image/Chery-Logo.png" alt="Chery Logo" class="h-9 sm:h-11 w-auto max-w-[120px] object-contain drop-shadow">
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-2">
@@ -432,11 +464,11 @@
                 SERVICE</h1>
               <span
                 class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> REAL-TIME 10m
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> REAL-TIME 5m
               </span>
             </div>
             <p class="text-slate-400 text-xs sm:text-sm mt-0.5">Layar Informasi Ruang Tunggu Customer — Otomatis
-              diperbarui setiap 10 menit tanpa refresh</p>
+              diperbarui setiap 5 menit tanpa refresh</p>
           </div>
         </div>
 
@@ -511,7 +543,7 @@
         <span>Bagi kendaraan dengan status <strong class="text-emerald-400">SELESAI / SIAP DIAMBIL</strong>, silakan
           menghubungi Service Advisor (SA) kami.</span>
       </div>
-      <div id="tvLastSync" class="text-slate-400 font-mono">Sinkronisasi Real-Time Aktif (Interval 10 Menit)</div>
+      <div id="tvLastSync" class="text-slate-400 font-mono">Sinkronisasi Real-Time Aktif (Interval 5 Menit)</div>
     </footer>
   </div>
 
@@ -536,10 +568,10 @@
       <!-- Header Branding -->
       <div class="p-6 sm:p-7 pb-4 text-center">
         <div class="relative inline-block mb-3">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 shadow-lg shadow-blue-500/30 flex items-center justify-center mx-auto ring-4 ring-white/10 text-white text-2xl transform hover:scale-105 transition-transform duration-300">
-            <i class="fa-solid fa-car-side"></i>
+          <div class="px-4 py-2.5 bg-slate-800/80 backdrop-blur-md rounded-2xl ring-1 ring-white/10 shadow-xl shadow-blue-950/60 flex items-center justify-center mx-auto transform hover:scale-105 transition-transform duration-300">
+            <img src="image/Chery-Logo.png" alt="Chery Logo" class="h-12 sm:h-14 w-auto max-w-[140px] object-contain drop-shadow">
           </div>
-          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
         </div>
         
         <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">JPCB Cherry Arta Kranji</h1>
@@ -632,135 +664,174 @@
   <!-- ========================================================================= -->
   <!-- 3. APLIKASI UTAMA (DENGAN PERSISTENT SESSION & VALIDASI MENU ROLE)        -->
   <!-- ========================================================================= -->
-  <div id="appView" class="hidden min-h-screen flex flex-col md:flex-row bg-slate-100">
-    <!-- Top Bar Khusus Mobile (< md) -->
-    <header
-      class="md:hidden bg-slate-900 text-white px-3.5 py-3 flex items-center justify-between border-b border-slate-800 sticky top-0 z-30 shadow-md">
-      <div class="flex items-center gap-2.5">
-        <button onclick="toggleMobileSidebar(true)" aria-label="Buka Menu"
-          class="p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white hover:bg-slate-700 transition">
-          <i class="fa-solid fa-bars text-base"></i>
-        </button>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-            <i class="fa-solid fa-car-wrench text-sm text-white"></i>
-          </div>
-          <div>
-            <h2 class="font-bold text-sm leading-tight text-white">AutoCare DMS</h2>
-            <p id="mobileUserRoleBadge" class="text-[10px] text-blue-400 font-medium">Role</p>
-          </div>
-        </div>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <button onclick="refreshServerData(true)" title="Refresh Data"
-          class="p-2 rounded-xl bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 text-xs">
-          <i class="fa-solid fa-rotate"></i>
-        </button>
-        <button onclick="openTvMode()" title="Buka Layar TV Monitoring"
-          class="px-2.5 py-1.5 rounded-xl bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold flex items-center gap-1">
-          <i class="fa-solid fa-tv text-xs"></i> TV
-        </button>
-      </div>
-    </header>
-
+  <div id="appView" class="hidden min-h-screen flex bg-slate-100 relative">
+    
     <!-- Backdrop Overlay Mobile saat Sidebar Terbuka -->
     <div id="sidebarBackdrop" onclick="toggleMobileSidebar(false)"
       class="hidden fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-xs md:hidden transition-opacity"></div>
 
-    <!-- Sidebar (Drawer di Layar Mobile, Static di Desktop) -->
+    <!-- Sidebar (Drawer di Layar Mobile, Mini/Normal di Desktop) -->
     <aside id="appSidebar"
-      class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-slate-900 text-white flex flex-col justify-between shrink-0 transform -translate-x-full md:translate-x-0 md:static md:w-64 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
-      <div>
-        <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0">
-              <i class="fa-solid fa-car-wrench text-lg"></i>
+      class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white flex flex-col justify-between shrink-0 transform -translate-x-full md:translate-x-0 transition-all duration-300 ease-in-out shadow-2xl md:shadow-none md:sticky md:top-0 md:h-screen">
+      <div class="flex flex-col h-full overflow-y-auto">
+        <!-- Sidebar Brand Header + ASDP Panel-Left Toggle Button -->
+        <div class="sidebar-header h-16 px-4 border-b border-slate-800 flex items-center justify-between shrink-0">
+          <div class="brand-info flex items-center gap-2.5 overflow-hidden min-w-0">
+            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 text-white shadow-md shadow-blue-600/30">
+              <i class="fa-solid fa-car-wrench text-sm"></i>
             </div>
-            <div>
-              <h2 class="font-bold text-base leading-tight">AutoCare DMS</h2>
-              <p id="activeUserRoleBadge" class="text-xs text-blue-400 font-medium">Role</p>
+            <div class="min-w-0 truncate">
+              <h2 class="font-bold text-sm text-white truncate">AutoCare DMS</h2>
+              <p class="text-[10px] text-blue-400 font-medium truncate">JPCB Cherry Arta</p>
             </div>
           </div>
-          <button onclick="toggleMobileSidebar(false)" aria-label="Tutup Menu"
-            class="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition">
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
+
+          <div class="flex items-center gap-1">
+            <!-- Tombol Toggle Panel-Left Sesuai Referensi ASDP -->
+            <button onclick="toggleSidebarMini()" title="Toggle Ukuran Sidebar" aria-label="Toggle Sidebar"
+              class="w-9 h-9 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                <line x1="9" x2="9" y1="3" y2="21"/>
+              </svg>
+            </button>
+            
+            <!-- Tombol Close khusus mobile -->
+            <button onclick="toggleMobileSidebar(false)" aria-label="Tutup Menu"
+              class="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition cursor-pointer">
+              <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+          </div>
         </div>
 
-        <div class="p-4">
-          <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">Menu Sesuai Role Anda
-          </p>
+        <!-- Nav Menu -->
+        <div class="p-3">
+          <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Menu Navigasi</p>
           <nav class="space-y-1">
-            <button onclick="switchTab('dashboard')" id="nav-dashboard"
-              class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white">
-              <i class="fa-solid fa-grip w-5 text-center"></i> Dashboard Status
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" title="Dashboard Status"
+              class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white transition-colors">
+              <i class="fa-solid fa-grip w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Dashboard Status</span>
             </button>
 
-            <button onclick="switchTab('create')" id="nav-create"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-file-circle-plus w-5 text-center"></i> Kelola Service (SA)
+            <button onclick="switchTab('create')" id="nav-create" title="Kelola Service (SA)"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-file-circle-plus w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Kelola Service (SA)</span>
             </button>
 
-            <button onclick="switchTab('job')" id="nav-job"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-screwdriver-wrench w-5 text-center"></i> Update Job (Mekanik)
+            <button onclick="switchTab('job')" id="nav-job" title="Update Job (Mekanik)"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-screwdriver-wrench w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Update Job (Mekanik)</span>
             </button>
 
-            <button onclick="switchTab('part')" id="nav-part"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-gears w-5 text-center"></i> Update Part (Partman)
+            <button onclick="switchTab('part')" id="nav-part" title="Update Part (Partman)"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-gears w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Update Part (Partman)</span>
             </button>
 
-            <button onclick="switchTab('qc')" id="nav-qc"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-clipboard-check w-5 text-center"></i> Update QC Status
+            <button onclick="switchTab('qc')" id="nav-qc" title="Update QC Status"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-clipboard-check w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Update QC Status</span>
             </button>
 
-            <button onclick="switchTab('wash')" id="nav-wash"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-soap w-5 text-center"></i> Update Wash Status
+            <button onclick="switchTab('wash')" id="nav-wash" title="Update Wash Status"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-soap w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Update Wash Status</span>
             </button>
 
-            <button onclick="switchTab('reports')" id="nav-reports"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-chart-column w-5 text-center"></i> Daily & Monthly Report
+            <button onclick="switchTab('reports')" id="nav-reports" title="Daily & Monthly Report"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-chart-column w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Daily &amp; Monthly Report</span>
             </button>
 
-            <button onclick="switchTab('users')" id="nav-users"
-              class="hidden w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800">
-              <i class="fa-solid fa-users-gear w-5 text-center"></i> Kelola User (Admin)
+            <button onclick="switchTab('users')" id="nav-users" title="Kelola User (Admin)"
+              class="hidden nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors">
+              <i class="fa-solid fa-users-gear w-5 text-center shrink-0"></i>
+              <span class="nav-text truncate">Kelola User (Admin)</span>
             </button>
           </nav>
 
           <div class="mt-6 pt-4 border-t border-slate-800">
-            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 px-3 mb-2">Layar Ruang Tunggu
-            </p>
-            <button onclick="openTvMode()"
-              class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/30 transition">
-              <i class="fa-solid fa-tv w-5 text-center"></i> Buka TV Monitoring
+            <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Display Ruang Tunggu</p>
+            <button onclick="openTvMode()" title="Buka TV Monitoring"
+              class="tv-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/25 transition">
+              <i class="fa-solid fa-tv w-5 text-center shrink-0"></i>
+              <span class="tv-title truncate">Layar TV Monitoring</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="p-4 border-t border-slate-800 bg-slate-950/50">
-        <div class="flex items-center justify-between">
-          <div>
-            <p id="activeUserName" class="text-sm font-semibold text-white">Nama User</p>
-            <p id="activeUserAccount" class="text-xs text-emerald-400 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Session Tersimpan
-            </p>
+      <!-- Bottom User Profile -->
+      <div class="user-box p-3.5 border-t border-slate-800 bg-slate-950/50 shrink-0">
+        <div class="user-box-inner flex items-center justify-between gap-2 px-1">
+          <div class="user-details min-w-0">
+            <p id="activeUserName" class="text-xs font-bold text-white truncate">Nama User</p>
+            <p id="activeUserRoleBadge" class="text-[10px] text-blue-400 font-medium truncate">Role</p>
           </div>
-          <button onclick="handleLogout()"
-            class="text-xs bg-red-500/20 hover:bg-red-500/30 text-red-300 px-3 py-1.5 rounded-lg font-semibold">
-            Keluar
+          <button onclick="handleLogout()" title="Keluar dari Aplikasi"
+            class="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition text-xs shrink-0 cursor-pointer">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
           </button>
         </div>
       </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 p-3.5 sm:p-5 md:p-8 overflow-y-auto min-w-0">
+    <!-- WRAPPER HALAMAN UTAMA (TOPBAR ADMIN + KONTEN) -->
+    <div class="flex-1 flex flex-col min-w-0 min-h-screen">
+      
+      <!-- TOP NAVBAR BERSIH ALA ASDP (STICKY) -->
+      <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <!-- Sisi Kiri: Hamburger (mobile) & Judul Halaman Aktif -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <button onclick="toggleMobileSidebar(true)" aria-label="Buka Menu"
+            class="md:hidden w-9 h-9 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 flex items-center justify-center text-sm transition cursor-pointer">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div class="flex items-center gap-2">
+            <h2 id="topNavCurrentTitle" class="text-sm sm:text-base font-bold text-slate-900">Dashboard Status</h2>
+            <span class="text-slate-300 hidden sm:inline">•</span>
+            <span class="text-xs text-slate-500 font-medium hidden sm:inline">JPCB Cherry Arta Kranji</span>
+          </div>
+        </div>
+
+        <!-- Sisi Kanan: TV, Refresh & Avatar Profil ASDP Style -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button onclick="openTvMode()" title="Buka Layar TV Ruang Tunggu"
+            class="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+            <i class="fa-solid fa-tv text-xs"></i>
+            <span class="hidden sm:inline">Layar TV</span>
+          </button>
+
+          <button onclick="refreshServerData(true)" title="Refresh Data Bengkel"
+            class="w-9 h-9 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 hover:text-blue-600 flex items-center justify-center transition cursor-pointer">
+            <i class="fa-solid fa-rotate text-xs"></i>
+          </button>
+
+          <div class="h-6 w-px bg-slate-200 mx-1"></div>
+
+          <!-- Avatar Profil ASDP Style (Lingkaran di pojok kanan atas) -->
+          <div class="flex items-center gap-2.5" title="Akun Pengguna">
+            <div class="w-9 h-9 rounded-full border border-slate-300 bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="hidden md:block text-left">
+              <p id="topbarUserName" class="text-xs font-bold text-slate-800 leading-tight">User</p>
+              <p id="topbarUserRoleBadge" class="text-[10px] text-blue-600 font-semibold leading-tight">Role</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT BODY (SCROLLABLE & CLEAN) -->
+      <main class="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 overflow-y-auto min-w-0">
 
       <!-- TAB 1: DASHBOARD -->
       <section id="tab-dashboard" class="space-y-4 sm:space-y-6">
@@ -1028,8 +1099,8 @@
             </table>
           </div>
         </div>
-      </section>
     </main>
+    </div>
   </div>
 
   <script>
@@ -1100,6 +1171,78 @@
     let editingOrderId = null;
 
     // =========================================================================
+    // HELPER PENYIMPANAN SESI USER & AUTO-EXPIRED SETELAH PUKUL 00.00 (GANTI HARI)
+    // =========================================================================
+    function getTodayDateString() {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function saveUserSession(user) {
+      if (!user) {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        return;
+      }
+      const sessionData = {
+        user: user,
+        loginDate: getTodayDateString(), // Format 'YYYY-MM-DD'
+        loginTime: new Date().toLocaleTimeString('id-ID'),
+        timestamp: Date.now()
+      };
+      localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sessionData));
+    }
+
+    function getValidSavedSession() {
+      const savedSessionRaw = localStorage.getItem(SESSION_STORAGE_KEY);
+      if (!savedSessionRaw) return null;
+
+      try {
+        const parsed = JSON.parse(savedSessionRaw);
+        if (!parsed) return null;
+
+        // Mendukung format baru (berisi .user dan .loginDate) dan format lawas
+        const user = parsed.user || (parsed.username ? parsed : null);
+        const loginDate = parsed.loginDate;
+
+        if (!user || !user.username) {
+          localStorage.removeItem(SESSION_STORAGE_KEY);
+          return null;
+        }
+
+        // Aturan Kedaluwarsa Kalender: Setelah lewat jam 00:00 (ganti hari), sesi otomatis expired
+        const today = getTodayDateString();
+        if (!loginDate || loginDate !== today) {
+          console.warn('[Session] Sesi login telah expired (telah melewati pukul 00:00 hari berikutnya).');
+          localStorage.removeItem(SESSION_STORAGE_KEY);
+          return null;
+        }
+
+        return user;
+      } catch (e) {
+        localStorage.removeItem(SESSION_STORAGE_KEY);
+        return null;
+      }
+    }
+
+    function checkMidnightSessionExpiration() {
+      if (!currentUser) return;
+      const today = getTodayDateString();
+      const savedSessionRaw = localStorage.getItem(SESSION_STORAGE_KEY);
+      if (savedSessionRaw) {
+        try {
+          const parsed = JSON.parse(savedSessionRaw);
+          if (parsed && parsed.loginDate && parsed.loginDate !== today) {
+            handleLogout();
+            showToast('Sesi login Anda telah berakhir (melewati pukul 00:00). Silakan login kembali.', false);
+          }
+        } catch (e) { }
+      }
+    }
+
+    // =========================================================================
     // INISIALISASI HALAMAN & RESTORE SESSION OTOMATIS SAAT BROWSER DI-REFRESH
     // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
@@ -1109,43 +1252,36 @@
       const urlParams = new URLSearchParams(window.location.search);
       const isTvUrl = (INITIAL_PAGE === 'tv' || urlParams.get('page') === 'tv');
 
-      // Cek apakah ada session tersimpan di localStorage agar tidak logout saat refresh
-      const savedSessionRaw = localStorage.getItem(SESSION_STORAGE_KEY);
-      if (savedSessionRaw) {
-        try {
-          const parsedUser = JSON.parse(savedSessionRaw);
-          if (parsedUser && parsedUser.username) {
-            currentUser = parsedUser;
-            updateTvExitButtonLabel();
+      // Cek apakah ada session tersimpan di localStorage dan belum melewati pk 00:00
+      const validUser = getValidSavedSession();
+      if (validUser) {
+        currentUser = validUser;
+        updateTvExitButtonLabel();
 
-            if (isTvUrl) {
-              openTvMode();
-            } else {
-              // Verifikasi ke server bahwa akun masih aktif
-              showLoading('Memulihkan Sesi Login Anda...');
-              google.script.run
-                .withSuccessHandler(res => {
-                  hideLoading();
-                  if (res && res.success) {
-                    currentUser = res.user;
-                    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(currentUser));
-                    setupUserSession();
-                  } else {
-                    localStorage.removeItem(SESSION_STORAGE_KEY);
-                    currentUser = null;
-                    updateTvExitButtonLabel();
-                  }
-                })
-                .withFailureHandler(() => {
-                  hideLoading();
-                  setupUserSession();
-                })
-                .verifySavedSession(parsedUser.username);
-              return;
-            }
-          }
-        } catch (e) {
-          localStorage.removeItem(SESSION_STORAGE_KEY);
+        if (isTvUrl) {
+          openTvMode();
+        } else {
+          // Verifikasi ke server bahwa akun masih aktif
+          showLoading('Memulihkan Sesi Login Anda...');
+          google.script.run
+            .withSuccessHandler(res => {
+              hideLoading();
+              if (res && res.success) {
+                currentUser = res.user;
+                saveUserSession(currentUser);
+                setupUserSession();
+              } else {
+                localStorage.removeItem(SESSION_STORAGE_KEY);
+                currentUser = null;
+                updateTvExitButtonLabel();
+              }
+            })
+            .withFailureHandler(() => {
+              hideLoading();
+              setupUserSession();
+            })
+            .verifySavedSession(validUser.username);
+          return;
         }
       }
 
@@ -1288,7 +1424,7 @@
 
       fetchTvQueueData(true);
       if (tvRefreshTimer) clearInterval(tvRefreshTimer);
-      tvRefreshTimer = setInterval(() => fetchTvQueueData(false), 10 * 60 * 1000); // 10 Menit
+      tvRefreshTimer = setInterval(() => fetchTvQueueData(false), 5 * 60 * 1000); // 5 Menit
     }
 
     function exitTvMode() {
@@ -1317,7 +1453,9 @@
         const dateEl = document.getElementById('tvDate');
         if (clockEl) clockEl.textContent = now.toLocaleTimeString('id-ID', { hour12: false });
         if (dateEl) dateEl.textContent = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        checkMidnightSessionExpiration();
       }, 1000);
+      window.addEventListener('focus', checkMidnightSessionExpiration);
     }
 
     function fetchTvQueueData(showInitialLoader) {
@@ -1335,7 +1473,7 @@
               const syncEl = document.getElementById('tvLastSync');
               if (syncEl) {
                 const t = new Date().toLocaleTimeString('id-ID', { hour12: false });
-                syncEl.textContent = 'Update Real-Time Terakhir: ' + t + ' (Interval 10 Menit)';
+                syncEl.textContent = 'Update Real-Time Terakhir: ' + t + ' (Interval 5 Menit)';
               }
             }
           })
@@ -1467,8 +1605,8 @@
           hideLoading();
           if (res.success) {
             currentUser = res.user;
-            // Simpan session ke localStorage agar tahan terhadap Refresh halaman
-            localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(currentUser));
+            // Simpan session ke localStorage dengan tanggal login hari ini (expired setelah pk 00:00)
+            saveUserSession(currentUser);
 
             // Reset form username & password setelah berhasil login
             document.getElementById('loginUsername').value = '';
@@ -1517,6 +1655,25 @@
       }
     }
 
+    function toggleSidebarMini() {
+      const sidebar = document.getElementById('appSidebar');
+      if (!sidebar) return;
+
+      if (window.innerWidth < 768) {
+        toggleMobileSidebar(false);
+        return;
+      }
+
+      const isMini = sidebar.classList.contains('sidebar-mini');
+      if (isMini) {
+        sidebar.classList.remove('sidebar-mini');
+        localStorage.setItem('AUTOCARE_SIDEBAR_MINI', 'false');
+      } else {
+        sidebar.classList.add('sidebar-mini');
+        localStorage.setItem('AUTOCARE_SIDEBAR_MINI', 'true');
+      }
+    }
+
     function setupUserSession() {
       document.getElementById('loginView').classList.add('hidden');
       document.getElementById('tvScreenView').classList.add('hidden');
@@ -1524,8 +1681,19 @@
 
       document.getElementById('activeUserName').textContent = currentUser.fullName;
       document.getElementById('activeUserRoleBadge').textContent = currentUser.role;
-      const mobileRoleBadge = document.getElementById('mobileUserRoleBadge');
-      if (mobileRoleBadge) mobileRoleBadge.textContent = currentUser.role;
+
+      // Update Topbar User Info (ASDP Style)
+      const topbarName = document.getElementById('topbarUserName');
+      if (topbarName) topbarName.textContent = currentUser.fullName || currentUser.username;
+      const topbarRole = document.getElementById('topbarUserRoleBadge');
+      if (topbarRole) topbarRole.textContent = currentUser.role;
+
+      // Pulihkan preferensi Mini Sidebar di Desktop
+      if (window.innerWidth >= 768 && localStorage.getItem('AUTOCARE_SIDEBAR_MINI') === 'true') {
+        const sidebar = document.getElementById('appSidebar');
+        if (sidebar) sidebar.classList.add('sidebar-mini');
+      }
+
       updateTvExitButtonLabel();
 
       const role = currentUser.role;
@@ -1570,7 +1738,26 @@
     }
 
     function switchTab(tabName) {
-      toggleMobileSidebar(false);
+      if (window.innerWidth < 768) {
+        toggleMobileSidebar(false);
+      }
+
+      // Update Judul Halaman di Top Navbar
+      const tabTitleMap = {
+        dashboard: 'Dashboard Status',
+        create: 'Kelola Service (SA)',
+        job: 'Update Job (Mekanik)',
+        part: 'Update Part (Partman)',
+        qc: 'Update QC Status',
+        wash: 'Update Wash Status',
+        reports: 'Daily & Monthly Report',
+        users: 'Kelola User (Admin)'
+      };
+      const titleEl = document.getElementById('topNavCurrentTitle');
+      if (titleEl && tabTitleMap[tabName]) {
+        titleEl.textContent = tabTitleMap[tabName];
+      }
+
       const allTabs = ['dashboard', 'create', 'job', 'part', 'qc', 'wash', 'reports', 'users'];
       allTabs.forEach(t => {
         const sec = document.getElementById('tab-' + t);
@@ -1579,8 +1766,8 @@
         const navBtn = document.getElementById('nav-' + t);
         if (navBtn && !navBtn.classList.contains('hidden')) {
           navBtn.className = (t === tabName)
-            ? 'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-blue-600 text-white'
-            : 'w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800';
+            ? 'nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white transition-colors'
+            : 'nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition-colors';
         }
       });
 
