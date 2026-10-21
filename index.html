@@ -39,10 +39,13 @@
     #appSidebar {
       transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
     @media (min-width: 768px) {
       #appSidebar.sidebar-mini {
-        width: 5rem !important; /* 80px */
+        width: 5rem !important;
+        /* 80px */
       }
+
       #appSidebar.sidebar-mini .brand-info,
       #appSidebar.sidebar-mini .nav-text,
       #appSidebar.sidebar-mini .menu-category-title,
@@ -50,17 +53,20 @@
       #appSidebar.sidebar-mini .user-details {
         display: none !important;
       }
+
       #appSidebar.sidebar-mini .sidebar-header {
         justify-content: center !important;
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
       }
+
       #appSidebar.sidebar-mini .nav-btn,
       #appSidebar.sidebar-mini .tv-btn {
         justify-content: center !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
       }
+
       #appSidebar.sidebar-mini .user-box-inner {
         justify-content: center !important;
       }
@@ -456,7 +462,8 @@
         <div class="flex items-start sm:items-center gap-3 sm:gap-4">
           <div
             class="px-3.5 py-2 rounded-2xl bg-slate-800/90 border border-slate-700/80 shadow-lg shadow-blue-950/40 flex items-center justify-center shrink-0">
-            <img src="image/Chery-Logo.png" alt="Chery Logo" class="h-9 sm:h-11 w-auto max-w-[120px] object-contain drop-shadow">
+            <img src="image/Chery-Logo.png" alt="Chery Logo"
+              class="h-9 sm:h-11 w-auto max-w-[120px] object-contain drop-shadow">
           </div>
           <div>
             <div class="flex flex-wrap items-center gap-2">
@@ -553,47 +560,59 @@
   <!-- ========================================================================= -->
   <div id="loginView"
     class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-slate-950 relative overflow-hidden">
-    
+
     <!-- Ambient Glow / Background Orbs -->
     <div class="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none">
+    </div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none">
+    </div>
 
     <!-- Login Card Container -->
-    <div class="w-full max-w-md bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-slate-800 shadow-2xl shadow-blue-950/80 overflow-hidden relative z-10 transition-all duration-300">
-      
+    <div
+      class="w-full max-w-md bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-slate-800 shadow-2xl shadow-blue-950/80 overflow-hidden relative z-10 transition-all duration-300">
+
       <!-- Top Decorative Accent Bar -->
       <div class="h-1.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400"></div>
 
       <!-- Header Branding -->
       <div class="p-6 sm:p-7 pb-4 text-center">
         <div class="relative inline-block mb-3">
-          <div class="px-4 py-2.5 bg-slate-800/80 backdrop-blur-md rounded-2xl ring-1 ring-white/10 shadow-xl shadow-blue-950/60 flex items-center justify-center mx-auto transform hover:scale-105 transition-transform duration-300">
-            <img src="image/Chery-Logo.png" alt="Chery Logo" class="h-12 sm:h-14 w-auto max-w-[140px] object-contain drop-shadow">
+          <div
+            class="px-4 py-2.5 bg-slate-800/80 backdrop-blur-md rounded-2xl ring-1 ring-white/10 shadow-xl shadow-blue-950/60 flex items-center justify-center mx-auto transform hover:scale-105 transition-transform duration-300">
+            <img src="image/Chery-Logo.png" alt="Chery Logo"
+              class="h-12 sm:h-14 w-auto max-w-[140px] object-contain drop-shadow">
           </div>
-          <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+          <span
+            class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
         </div>
-        
+
         <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">JPCB Cherry Arta Kranji</h1>
-        <div class="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-[11px] font-semibold text-blue-300">
+        <div
+          class="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-[11px] font-semibold text-blue-300">
           <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-          AutoCare DMS • Service &amp; Inventory System
+          Service &amp; Monitoring System
         </div>
       </div>
 
       <div class="p-6 sm:p-7 pt-2 space-y-4">
-        
+
         <!-- Layar TV Ruang Tunggu Banner (Interactive Card) -->
-        <div class="bg-gradient-to-br from-slate-800/90 via-slate-800/70 to-blue-950/50 border border-slate-700/70 hover:border-blue-500/50 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md hover:shadow-blue-900/20 transition-all duration-300 group">
+        <div
+          class="bg-gradient-to-br from-slate-800/90 via-slate-800/70 to-blue-950/50 border border-slate-700/70 hover:border-blue-500/50 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md hover:shadow-blue-900/20 transition-all duration-300 group">
           <div class="min-w-0">
             <div class="flex items-center gap-1.5">
               <span class="relative flex h-2 w-2">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Live Antrian • Tanpa Login</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Live Antrian • Tanpa
+                Login</span>
             </div>
-            <h3 class="font-bold text-sm text-white mt-0.5 group-hover:text-blue-300 transition-colors">Layar TV Ruang Tunggu</h3>
+            <h3 class="font-bold text-sm text-white mt-0.5 group-hover:text-blue-300 transition-colors">Layar TV Ruang
+              Tunggu</h3>
             <p class="text-[11px] text-slate-400">Monitoring progres kendaraan customer</p>
           </div>
           <button onclick="openTvMode()"
@@ -605,7 +624,8 @@
         <!-- Divider -->
         <div class="relative flex py-1 items-center">
           <div class="flex-grow border-t border-slate-800"></div>
-          <span class="flex-shrink mx-3 text-slate-500 text-[11px] uppercase tracking-wider font-semibold">Login Staff &amp; Administrator</span>
+          <span class="flex-shrink mx-3 text-slate-500 text-[11px] uppercase tracking-wider font-semibold">Login Staff
+            &amp; Administrator</span>
           <div class="flex-grow border-t border-slate-800"></div>
         </div>
 
@@ -616,7 +636,8 @@
         <!-- Form Fields -->
         <div class="space-y-3.5">
           <div>
-            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Username Staff</label>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Username
+              Staff</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <i class="fa-solid fa-user text-xs"></i>
@@ -665,7 +686,7 @@
   <!-- 3. APLIKASI UTAMA (DENGAN PERSISTENT SESSION & VALIDASI MENU ROLE)        -->
   <!-- ========================================================================= -->
   <div id="appView" class="hidden min-h-screen flex bg-slate-100 relative">
-    
+
     <!-- Backdrop Overlay Mobile saat Sidebar Terbuka -->
     <div id="sidebarBackdrop" onclick="toggleMobileSidebar(false)"
       class="hidden fixed inset-0 z-40 bg-slate-950/70 backdrop-blur-xs md:hidden transition-opacity"></div>
@@ -677,7 +698,8 @@
         <!-- Sidebar Brand Header + ASDP Panel-Left Toggle Button -->
         <div class="sidebar-header h-16 px-4 border-b border-slate-800 flex items-center justify-between shrink-0">
           <div class="brand-info flex items-center gap-2.5 overflow-hidden min-w-0">
-            <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 text-white shadow-md shadow-blue-600/30">
+            <div
+              class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 text-white shadow-md shadow-blue-600/30">
               <i class="fa-solid fa-car-wrench text-sm"></i>
             </div>
             <div class="min-w-0 truncate">
@@ -690,12 +712,13 @@
             <!-- Tombol Toggle Panel-Left Sesuai Referensi ASDP -->
             <button onclick="toggleSidebarMini()" title="Toggle Ukuran Sidebar" aria-label="Toggle Sidebar"
               class="w-9 h-9 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition shrink-0 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                <line x1="9" x2="9" y1="3" y2="21"/>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                <line x1="9" x2="9" y1="3" y2="21" />
               </svg>
             </button>
-            
+
             <!-- Tombol Close khusus mobile -->
             <button onclick="toggleMobileSidebar(false)" aria-label="Tutup Menu"
               class="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition cursor-pointer">
@@ -706,7 +729,8 @@
 
         <!-- Nav Menu -->
         <div class="p-3">
-          <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Menu Navigasi</p>
+          <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Menu
+            Navigasi</p>
           <nav class="space-y-1">
             <button onclick="switchTab('dashboard')" id="nav-dashboard" title="Dashboard Status"
               class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium bg-blue-600 text-white transition-colors">
@@ -758,7 +782,8 @@
           </nav>
 
           <div class="mt-6 pt-4 border-t border-slate-800">
-            <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Display Ruang Tunggu</p>
+            <p class="menu-category-title text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">
+              Display Ruang Tunggu</p>
             <button onclick="openTvMode()" title="Buka TV Monitoring"
               class="tv-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/25 transition">
               <i class="fa-solid fa-tv w-5 text-center shrink-0"></i>
@@ -785,9 +810,10 @@
 
     <!-- WRAPPER HALAMAN UTAMA (TOPBAR ADMIN + KONTEN) -->
     <div class="flex-1 flex flex-col min-w-0 min-h-screen">
-      
+
       <!-- TOP NAVBAR BERSIH ALA ASDP (STICKY) -->
-      <header class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+      <header
+        class="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-xs">
         <!-- Sisi Kiri: Hamburger (mobile) & Judul Halaman Aktif -->
         <div class="flex items-center gap-3 sm:gap-4">
           <button onclick="toggleMobileSidebar(true)" aria-label="Buka Menu"
@@ -819,7 +845,8 @@
 
           <!-- Avatar Profil ASDP Style (Lingkaran di pojok kanan atas) -->
           <div class="flex items-center gap-2.5" title="Akun Pengguna">
-            <div class="w-9 h-9 rounded-full border border-slate-300 bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
+            <div
+              class="w-9 h-9 rounded-full border border-slate-300 bg-slate-100 text-slate-600 flex items-center justify-center text-sm shadow-2xs">
               <i class="fa-regular fa-user"></i>
             </div>
             <div class="hidden md:block text-left">
@@ -833,273 +860,279 @@
       <!-- CONTENT BODY (SCROLLABLE & CLEAN) -->
       <main class="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 overflow-y-auto min-w-0">
 
-      <!-- TAB 1: DASHBOARD -->
-      <section id="tab-dashboard" class="space-y-4 sm:space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Dashboard Status Service Car</h1>
-            <p class="text-xs sm:text-sm text-slate-500">Daftar kendaraan yang sedang diproses beserta status pengerjaan
-              &
-              inventaris barang</p>
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="space-y-4 sm:space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Dashboard Status Service Car</h1>
+              <p class="text-xs sm:text-sm text-slate-500">Daftar kendaraan yang sedang diproses beserta status
+                pengerjaan
+                &
+                inventaris barang</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <input id="searchPlate" oninput="renderDashboardCards()" type="text"
+                placeholder="Cari No. Polisi / Customer..."
+                class="w-full sm:w-60 px-3.5 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <button onclick="refreshServerData(true)"
+                class="bg-white border border-slate-300 hover:bg-slate-50 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 shadow-xs">
+                <i class="fa-solid fa-rotate"></i> Refresh
+              </button>
+            </div>
           </div>
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input id="searchPlate" oninput="renderDashboardCards()" type="text"
-              placeholder="Cari No. Polisi / Customer..."
-              class="w-full sm:w-60 px-3.5 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
-            <button onclick="refreshServerData(true)"
-              class="bg-white border border-slate-300 hover:bg-slate-50 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5 shadow-xs">
-              <i class="fa-solid fa-rotate"></i> Refresh
+          <div id="dashboardCardsContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 sm:gap-5">
+          </div>
+        </section>
+
+        <!-- TAB 2: MANAJEMEN SERVICE ORDER (KHUSUS SA) -->
+        <section id="tab-create" class="hidden space-y-4 sm:space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Manajemen Work Order (Service Advisor)</h1>
+              <p class="text-xs sm:text-sm text-slate-500">Daftar seluruh work order service kendaraan. Tambahkan order
+                baru,
+                perbarui data, atau hapus order.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <input id="searchSaOrder" oninput="renderSaOrderList()" type="text"
+                placeholder="Cari No. Polisi / Customer / ID..."
+                class="w-full sm:w-64 px-3.5 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <button onclick="openServiceOrderModal('create')"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-xs sm:text-sm shadow flex items-center justify-center gap-2 transition shrink-0">
+                <i class="fa-solid fa-circle-plus"></i> Tambah Service Order
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-sm min-w-[760px]">
+                <thead>
+                  <tr class="bg-slate-50 border-b text-xs uppercase text-slate-500 tracking-wider">
+                    <th class="p-3.5">Order ID & Tanggal</th>
+                    <th class="p-3.5">No. Polisi & Model Mobil</th>
+                    <th class="p-3.5">Customer & Kontak</th>
+                    <th class="p-3.5">Keluhan Customer</th>
+                    <th class="p-3.5">Inventaris Barang</th>
+                    <th class="p-3.5">Status Pengerjaan</th>
+                    <th class="p-3.5 text-center">Aksi (SA)</th>
+                  </tr>
+                </thead>
+                <tbody id="saOrderTableBody" class="divide-y"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 3: UPDATE JOB (KHUSUS MEKANIK & MANAGER) -->
+        <section id="tab-job" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Job Service (Mekanik)</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Mekanik klaim antrian baru (Take Job) dan menekan tombol
+              Complete
+              Work
+              setelah pengerjaan selesai</p>
+          </div>
+          <div id="jobListContainer" class="space-y-3.5 sm:space-y-4"></div>
+        </section>
+
+        <!-- TAB 4: UPDATE PART (KHUSUS PARTMAN) -->
+        <section id="tab-part" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Pergantian Suku Cadang (Partman)</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Klik tombol Popup Input Part untuk menambahkan banyak suku
+              cadang
+              sekaligus
+              dan menyelesaikan proses part</p>
+          </div>
+          <div id="partListContainer" class="space-y-3.5 sm:space-y-4"></div>
+        </section>
+
+        <!-- TAB 5: UPDATE QC STATUS (KHUSUS QUALITY CHECK - LENGKAP DENGAN TOMBOL REVISI) -->
+        <section id="tab-qc" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Quality Check (Foreman QC)</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Jika lolos QC lanjut ke Cuci Mobil. Jika masih ada
+              perbaikan/ganti part,
+              klik tombol Revisi ke Mekanik atau Partman.</p>
+          </div>
+          <div id="qcListContainer" class="space-y-3.5 sm:space-y-4"></div>
+        </section>
+
+        <!-- TAB 6: UPDATE WASH STATUS (KHUSUS WASHER) -->
+        <section id="tab-wash" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Wash Status (Pencucian Mobil)</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Mulai proses cuci mobil dan klik Selesai Mencuci (Completed)
+              saat
+              mobil siap
+              diserahkan ke customer</p>
+          </div>
+          <div id="washListContainer" class="space-y-3.5 sm:space-y-4"></div>
+        </section>
+
+        <!-- TAB 7: DAILY & MONTHLY REPORTING (FILTER HARIAN/BULANAN + EXPORT EXCEL RAPI) -->
+        <section id="tab-reports" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Daily & Monthly Reporting (Format Excel Rapi)</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Pilih tanggal harian atau bulan laporan, lalu klik tombol
+              Download Excel
+              (.xls) sesuai kebutuhan Anda</p>
+          </div>
+
+          <!-- Panel Kontrol Filter & Download Excel Harian vs Bulanan -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- Box Download Laporan Harian (Daily Report) -->
+            <div
+              class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between gap-4">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span
+                    class="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">Laporan
+                    Harian (Daily)</span>
+                  <h3 class="font-bold text-base text-slate-900 mt-2">Filter & Download Data Harian</h3>
+                  <p class="text-xs text-slate-500">Unduh laporan kendaraan khusus pada tanggal yang dipilih</p>
+                </div>
+                <p id="repDailyCount" class="text-xl sm:text-2xl font-extrabold text-blue-600">0 Unit</p>
+              </div>
+              <div
+                class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 pt-2 border-t border-slate-100">
+                <input id="filterDailyDate" type="date" onchange="applyReportFilter('daily')"
+                  class="px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold bg-slate-50 w-full sm:w-auto">
+                <button onclick="applyReportFilter('daily')"
+                  class="px-3 py-2 rounded-xl border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 text-center">
+                  Tampilkan di Tabel
+                </button>
+                <button onclick="downloadFormattedExcel('daily')"
+                  class="sm:ml-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-file-excel"></i> Download Excel Harian (.xls)
+                </button>
+              </div>
+            </div>
+
+            <!-- Box Download Laporan Bulanan (Monthly Report) -->
+            <div
+              class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between gap-4">
+              <div class="flex items-start justify-between">
+                <div>
+                  <span
+                    class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Laporan
+                    Bulanan (Monthly)</span>
+                  <h3 class="font-bold text-base text-slate-900 mt-2">Filter & Download Data Bulanan</h3>
+                  <p class="text-xs text-slate-500">Unduh rekapitulasi seluruh service dalam 1 bulan penuh</p>
+                </div>
+                <p id="repMonthlyCount" class="text-xl sm:text-2xl font-extrabold text-emerald-600">0 Unit</p>
+              </div>
+              <div
+                class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 pt-2 border-t border-slate-100">
+                <input id="filterMonthlyMonth" type="month" onchange="applyReportFilter('monthly')"
+                  class="px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold bg-slate-50 w-full sm:w-auto">
+                <button onclick="applyReportFilter('monthly')"
+                  class="px-3 py-2 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 text-center">
+                  Tampilkan di Tabel
+                </button>
+                <button onclick="downloadFormattedExcel('monthly')"
+                  class="sm:ml-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-file-excel"></i> Download Excel Bulanan (.xls)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bar Status Filter Tabel -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-200/70 px-4 py-2.5 rounded-xl">
+            <div class="text-xs font-semibold text-slate-700">
+              Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Laporan Harian (Hari
+                Ini)</span>
+            </div>
+            <button onclick="applyReportFilter('all')"
+              class="text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-300 w-fit">
+              Tampilkan Semua Data
             </button>
           </div>
-        </div>
-        <div id="dashboardCardsContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 sm:gap-5"></div>
-      </section>
 
-      <!-- TAB 2: MANAJEMEN SERVICE ORDER (KHUSUS SA) -->
-      <section id="tab-create" class="hidden space-y-4 sm:space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Manajemen Work Order (Service Advisor)</h1>
-            <p class="text-xs sm:text-sm text-slate-500">Daftar seluruh work order service kendaraan. Tambahkan order
-              baru,
-              perbarui data, atau hapus order.</p>
-          </div>
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input id="searchSaOrder" oninput="renderSaOrderList()" type="text"
-              placeholder="Cari No. Polisi / Customer / ID..."
-              class="w-full sm:w-64 px-3.5 py-2 border border-slate-300 rounded-xl text-xs sm:text-sm bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none">
-            <button onclick="openServiceOrderModal('create')"
-              class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-xs sm:text-sm shadow flex items-center justify-center gap-2 transition shrink-0">
-              <i class="fa-solid fa-circle-plus"></i> Tambah Service Order
-            </button>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div class="overflow-x-auto">
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-x-auto shadow-sm">
             <table class="w-full text-left border-collapse text-sm min-w-[760px]">
               <thead>
-                <tr class="bg-slate-50 border-b text-xs uppercase text-slate-500 tracking-wider">
-                  <th class="p-3.5">Order ID & Tanggal</th>
-                  <th class="p-3.5">No. Polisi & Model Mobil</th>
-                  <th class="p-3.5">Customer & Kontak</th>
-                  <th class="p-3.5">Keluhan Customer</th>
-                  <th class="p-3.5">Inventaris Barang</th>
-                  <th class="p-3.5">Status Pengerjaan</th>
-                  <th class="p-3.5 text-center">Aksi (SA)</th>
-                </tr>
-              </thead>
-              <tbody id="saOrderTableBody" class="divide-y"></tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- TAB 3: UPDATE JOB (KHUSUS MEKANIK & MANAGER) -->
-      <section id="tab-job" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Job Service (Mekanik)</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Mekanik klaim antrian baru (Take Job) dan menekan tombol Complete
-            Work
-            setelah pengerjaan selesai</p>
-        </div>
-        <div id="jobListContainer" class="space-y-3.5 sm:space-y-4"></div>
-      </section>
-
-      <!-- TAB 4: UPDATE PART (KHUSUS PARTMAN) -->
-      <section id="tab-part" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Pergantian Suku Cadang (Partman)</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Klik tombol Popup Input Part untuk menambahkan banyak suku cadang
-            sekaligus
-            dan menyelesaikan proses part</p>
-        </div>
-        <div id="partListContainer" class="space-y-3.5 sm:space-y-4"></div>
-      </section>
-
-      <!-- TAB 5: UPDATE QC STATUS (KHUSUS QUALITY CHECK - LENGKAP DENGAN TOMBOL REVISI) -->
-      <section id="tab-qc" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Quality Check (Foreman QC)</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Jika lolos QC lanjut ke Cuci Mobil. Jika masih ada
-            perbaikan/ganti part,
-            klik tombol Revisi ke Mekanik atau Partman.</p>
-        </div>
-        <div id="qcListContainer" class="space-y-3.5 sm:space-y-4"></div>
-      </section>
-
-      <!-- TAB 6: UPDATE WASH STATUS (KHUSUS WASHER) -->
-      <section id="tab-wash" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Update Wash Status (Pencucian Mobil)</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Mulai proses cuci mobil dan klik Selesai Mencuci (Completed) saat
-            mobil siap
-            diserahkan ke customer</p>
-        </div>
-        <div id="washListContainer" class="space-y-3.5 sm:space-y-4"></div>
-      </section>
-
-      <!-- TAB 7: DAILY & MONTHLY REPORTING (FILTER HARIAN/BULANAN + EXPORT EXCEL RAPI) -->
-      <section id="tab-reports" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Daily & Monthly Reporting (Format Excel Rapi)</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Pilih tanggal harian atau bulan laporan, lalu klik tombol
-            Download Excel
-            (.xls) sesuai kebutuhan Anda</p>
-        </div>
-
-        <!-- Panel Kontrol Filter & Download Excel Harian vs Bulanan -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <!-- Box Download Laporan Harian (Daily Report) -->
-          <div
-            class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between gap-4">
-            <div class="flex items-start justify-between">
-              <div>
-                <span
-                  class="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">Laporan
-                  Harian (Daily)</span>
-                <h3 class="font-bold text-base text-slate-900 mt-2">Filter & Download Data Harian</h3>
-                <p class="text-xs text-slate-500">Unduh laporan kendaraan khusus pada tanggal yang dipilih</p>
-              </div>
-              <p id="repDailyCount" class="text-xl sm:text-2xl font-extrabold text-blue-600">0 Unit</p>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 pt-2 border-t border-slate-100">
-              <input id="filterDailyDate" type="date" onchange="applyReportFilter('daily')"
-                class="px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold bg-slate-50 w-full sm:w-auto">
-              <button onclick="applyReportFilter('daily')"
-                class="px-3 py-2 rounded-xl border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 text-center">
-                Tampilkan di Tabel
-              </button>
-              <button onclick="downloadFormattedExcel('daily')"
-                class="sm:ml-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-file-excel"></i> Download Excel Harian (.xls)
-              </button>
-            </div>
-          </div>
-
-          <!-- Box Download Laporan Bulanan (Monthly Report) -->
-          <div
-            class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between gap-4">
-            <div class="flex items-start justify-between">
-              <div>
-                <span
-                  class="text-[11px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Laporan
-                  Bulanan (Monthly)</span>
-                <h3 class="font-bold text-base text-slate-900 mt-2">Filter & Download Data Bulanan</h3>
-                <p class="text-xs text-slate-500">Unduh rekapitulasi seluruh service dalam 1 bulan penuh</p>
-              </div>
-              <p id="repMonthlyCount" class="text-xl sm:text-2xl font-extrabold text-emerald-600">0 Unit</p>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 pt-2 border-t border-slate-100">
-              <input id="filterMonthlyMonth" type="month" onchange="applyReportFilter('monthly')"
-                class="px-3 py-2 border border-slate-300 rounded-xl text-xs font-semibold bg-slate-50 w-full sm:w-auto">
-              <button onclick="applyReportFilter('monthly')"
-                class="px-3 py-2 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-semibold hover:bg-emerald-100 text-center">
-                Tampilkan di Tabel
-              </button>
-              <button onclick="downloadFormattedExcel('monthly')"
-                class="sm:ml-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-xs shadow flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-file-excel"></i> Download Excel Bulanan (.xls)
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bar Status Filter Tabel -->
-        <div
-          class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-200/70 px-4 py-2.5 rounded-xl">
-          <div class="text-xs font-semibold text-slate-700">
-            Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Laporan Harian (Hari
-              Ini)</span>
-          </div>
-          <button onclick="applyReportFilter('all')"
-            class="text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-300 w-fit">
-            Tampilkan Semua Data
-          </button>
-        </div>
-
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-x-auto shadow-sm">
-          <table class="w-full text-left border-collapse text-sm min-w-[760px]">
-            <thead>
-              <tr class="bg-slate-50 border-b text-xs uppercase text-slate-500">
-                <th class="p-3.5">Order ID</th>
-                <th class="p-3.5">Tanggal</th>
-                <th class="p-3.5">No. Polisi & Mobil</th>
-                <th class="p-3.5">Customer</th>
-                <th class="p-3.5">SA & Mekanik</th>
-                <th class="p-3.5">Daftar Part Diganti</th>
-                <th class="p-3.5">Status</th>
-              </tr>
-            </thead>
-            <tbody id="reportTableBody" class="divide-y"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- TAB 8: MANAJEMEN USER DINAMIS (PROTEKSI AKUN ADMIN) -->
-      <section id="tab-users" class="hidden space-y-4 sm:space-y-6">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Manajemen User Dinamis</h1>
-          <p class="text-xs sm:text-sm text-slate-500">Daftarkan akun karyawan baru, nonaktifkan akun karyawan yang
-            keluar, atau
-            hapus akun (Akun Administrator dilindungi otomatis)</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4 h-fit shadow-sm">
-            <h3 class="font-bold text-base text-slate-900">Daftarkan Karyawan Baru</h3>
-            <div>
-              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Lengkap & Jabatan *</label>
-              <input id="uFullName" type="text" placeholder="Contoh: Doni (Mekanik Senior)"
-                class="w-full px-3 py-2 border rounded-xl text-sm">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Username Login *</label>
-              <input id="uUsername" type="text" placeholder="Contoh: doni"
-                class="w-full px-3 py-2 border rounded-xl text-sm lowercase">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Custom Password *</label>
-              <input id="uPassword" type="text" placeholder="Masukkan password..."
-                class="w-full px-3 py-2 border rounded-xl text-sm">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Role Akses *</label>
-              <select id="uRole" class="w-full px-3 py-2 border rounded-xl text-sm bg-white">
-                <option value="SA">SA (Service Advisor)</option>
-                <option value="Mekanik">Mekanik</option>
-                <option value="Partman">Partman</option>
-                <option value="QualityCheck">QualityCheck</option>
-                <option value="Washer">Washer (Cuci Mobil)</option>
-                <option value="Service Manager">Service Manager</option>
-                <option value="Administrator">Administrator</option>
-              </select>
-            </div>
-            <button onclick="handleAddUser()"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow">
-              <i class="fa-solid fa-user-plus mr-1"></i> Tambah User Baru
-            </button>
-          </div>
-
-          <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-x-auto shadow-sm">
-            <table class="w-full text-left border-collapse text-sm min-w-[650px]">
-              <thead>
                 <tr class="bg-slate-50 border-b text-xs uppercase text-slate-500">
-                  <th class="p-3.5">Nama Lengkap</th>
-                  <th class="p-3.5">Username</th>
-                  <th class="p-3.5">Password</th>
-                  <th class="p-3.5">Role</th>
-                  <th class="p-3.5">Status Akun</th>
-                  <th class="p-3.5">Aksi</th>
+                  <th class="p-3.5">Order ID</th>
+                  <th class="p-3.5">Tanggal</th>
+                  <th class="p-3.5">No. Polisi & Mobil</th>
+                  <th class="p-3.5">Customer</th>
+                  <th class="p-3.5">SA & Mekanik</th>
+                  <th class="p-3.5">Daftar Part Diganti</th>
+                  <th class="p-3.5">Status</th>
                 </tr>
               </thead>
-              <tbody id="usersTableBody" class="divide-y"></tbody>
+              <tbody id="reportTableBody" class="divide-y"></tbody>
             </table>
           </div>
-        </div>
-    </main>
+        </section>
+
+        <!-- TAB 8: MANAJEMEN USER DINAMIS (PROTEKSI AKUN ADMIN) -->
+        <section id="tab-users" class="hidden space-y-4 sm:space-y-6">
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900">Manajemen User Dinamis</h1>
+            <p class="text-xs sm:text-sm text-slate-500">Daftarkan akun karyawan baru, nonaktifkan akun karyawan yang
+              keluar, atau
+              hapus akun (Akun Administrator dilindungi otomatis)</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4 h-fit shadow-sm">
+              <h3 class="font-bold text-base text-slate-900">Daftarkan Karyawan Baru</h3>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Nama Lengkap & Jabatan
+                  *</label>
+                <input id="uFullName" type="text" placeholder="Contoh: Doni (Mekanik Senior)"
+                  class="w-full px-3 py-2 border rounded-xl text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Username Login *</label>
+                <input id="uUsername" type="text" placeholder="Contoh: doni"
+                  class="w-full px-3 py-2 border rounded-xl text-sm lowercase">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Custom Password *</label>
+                <input id="uPassword" type="text" placeholder="Masukkan password..."
+                  class="w-full px-3 py-2 border rounded-xl text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Role Akses *</label>
+                <select id="uRole" class="w-full px-3 py-2 border rounded-xl text-sm bg-white">
+                  <option value="SA">SA (Service Advisor)</option>
+                  <option value="Mekanik">Mekanik</option>
+                  <option value="Partman">Partman</option>
+                  <option value="QualityCheck">QualityCheck</option>
+                  <option value="Washer">Washer (Cuci Mobil)</option>
+                  <option value="Service Manager">Service Manager</option>
+                  <option value="Administrator">Administrator</option>
+                </select>
+              </div>
+              <button onclick="handleAddUser()"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow">
+                <i class="fa-solid fa-user-plus mr-1"></i> Tambah User Baru
+              </button>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 overflow-x-auto shadow-sm">
+              <table class="w-full text-left border-collapse text-sm min-w-[650px]">
+                <thead>
+                  <tr class="bg-slate-50 border-b text-xs uppercase text-slate-500">
+                    <th class="p-3.5">Nama Lengkap</th>
+                    <th class="p-3.5">Username</th>
+                    <th class="p-3.5">Password</th>
+                    <th class="p-3.5">Role</th>
+                    <th class="p-3.5">Status Akun</th>
+                    <th class="p-3.5">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody" class="divide-y"></tbody>
+              </table>
+            </div>
+          </div>
+      </main>
     </div>
   </div>
 
