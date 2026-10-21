@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoCare DMS - Service & Inventory System</title>
+  <title>JPCB - Cherry Arta Kranji</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <style>
@@ -520,56 +520,109 @@
   <!-- 2. HALAMAN LOGIN STAFF                                                    -->
   <!-- ========================================================================= -->
   <div id="loginView"
-    class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
-    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
-      <div class="bg-blue-600 p-6 text-white text-center">
-        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-3">
-          <i class="fa-solid fa-car-side text-2xl"></i>
+    class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-slate-950 relative overflow-hidden">
+    
+    <!-- Ambient Glow / Background Orbs -->
+    <div class="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Login Card Container -->
+    <div class="w-full max-w-md bg-slate-900/90 backdrop-blur-2xl rounded-3xl border border-slate-800 shadow-2xl shadow-blue-950/80 overflow-hidden relative z-10 transition-all duration-300">
+      
+      <!-- Top Decorative Accent Bar -->
+      <div class="h-1.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-400"></div>
+
+      <!-- Header Branding -->
+      <div class="p-6 sm:p-7 pb-4 text-center">
+        <div class="relative inline-block mb-3">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 shadow-lg shadow-blue-500/30 flex items-center justify-center mx-auto ring-4 ring-white/10 text-white text-2xl transform hover:scale-105 transition-transform duration-300">
+            <i class="fa-solid fa-car-side"></i>
+          </div>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
         </div>
-        <h1 class="text-2xl font-bold">AutoCare DMS</h1>
-        <p class="text-blue-100 text-xs mt-1">Service Car & Goods Inventory System</p>
+        
+        <h1 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">JPCB Cherry Arta Kranji</h1>
+        <div class="inline-flex items-center gap-1.5 mt-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/60 text-[11px] font-semibold text-blue-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          AutoCare DMS • Service &amp; Inventory System
+        </div>
       </div>
 
-      <div class="p-6 space-y-4">
-        <div class="bg-slate-900 text-white p-4 rounded-xl flex items-center justify-between shadow-md">
-          <div>
-            <span
-              class="text-[10px] uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-semibold">Tanpa
-              Login • Real-Time 10m</span>
-            <h3 class="font-bold text-sm mt-1">Layar TV Ruang Tunggu</h3>
-            <p class="text-xs text-slate-400">Tampilkan antrian untuk customer</p>
+      <div class="p-6 sm:p-7 pt-2 space-y-4">
+        
+        <!-- Layar TV Ruang Tunggu Banner (Interactive Card) -->
+        <div class="bg-gradient-to-br from-slate-800/90 via-slate-800/70 to-blue-950/50 border border-slate-700/70 hover:border-blue-500/50 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-md hover:shadow-blue-900/20 transition-all duration-300 group">
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Live Antrian • Tanpa Login</span>
+            </div>
+            <h3 class="font-bold text-sm text-white mt-0.5 group-hover:text-blue-300 transition-colors">Layar TV Ruang Tunggu</h3>
+            <p class="text-[11px] text-slate-400">Monitoring progres kendaraan customer</p>
           </div>
           <button onclick="openTvMode()"
-            class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-lg text-xs transition flex items-center gap-2 shrink-0">
-            <i class="fa-solid fa-tv"></i> Buka TV
+            class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition-all flex items-center gap-2 shrink-0 shadow-md shadow-blue-600/30 hover:scale-105 active:scale-95 cursor-pointer">
+            <i class="fa-solid fa-tv text-xs"></i> Buka TV
           </button>
         </div>
 
+        <!-- Divider -->
         <div class="relative flex py-1 items-center">
-          <div class="flex-grow border-t border-slate-200"></div>
-          <span class="flex-shrink mx-3 text-slate-400 text-xs uppercase font-medium">Login Staff / Admin</span>
-          <div class="flex-grow border-t border-slate-200"></div>
+          <div class="flex-grow border-t border-slate-800"></div>
+          <span class="flex-shrink mx-3 text-slate-500 text-[11px] uppercase tracking-wider font-semibold">Login Staff &amp; Administrator</span>
+          <div class="flex-grow border-t border-slate-800"></div>
         </div>
 
+        <!-- Error Message Alert -->
         <div id="loginError"
-          class="hidden bg-red-50 border border-red-200 text-red-600 text-xs p-3 rounded-lg font-medium"></div>
+          class="hidden bg-rose-950/70 border border-rose-800 text-rose-200 text-xs p-3 rounded-xl font-medium"></div>
 
-        <div>
-          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Username</label>
-          <input id="loginUsername" type="text" placeholder="Masukkan username..."
-            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <!-- Form Fields -->
+        <div class="space-y-3.5">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Username Staff</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-user text-xs"></i>
+              </div>
+              <input id="loginUsername" type="text" placeholder="Masukkan username..."
+                onkeydown="if(event.key === 'Enter') handleLogin()"
+                class="w-full pl-10 pr-3.5 py-2.5 bg-slate-800/80 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:bg-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 focus:outline-none transition-all">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Password</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-lock text-xs"></i>
+              </div>
+              <input id="loginPassword" type="password" placeholder="Masukkan password..."
+                onkeydown="if(event.key === 'Enter') handleLogin()"
+                class="w-full pl-10 pr-10 py-2.5 bg-slate-800/80 border border-slate-700/80 rounded-xl text-sm text-white placeholder-slate-500 focus:bg-slate-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 focus:outline-none transition-all">
+              <button type="button" onclick="toggleLoginPasswordVisibility()" title="Tampilkan/Sembunyikan Password"
+                class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-200 transition-colors cursor-pointer">
+                <i id="loginPasswordToggleIcon" class="fa-solid fa-eye-slash text-xs"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Custom Password</label>
-          <input id="loginPassword" type="password" placeholder="Masukkan password..."
-            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
-        </div>
-
+        <!-- Submit Button -->
         <button onclick="handleLogin()"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-lg text-sm transition shadow">
-          <i class="fa-solid fa-right-to-bracket mr-1.5"></i> Masuk Aplikasi
+          class="w-full mt-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl text-sm transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer">
+          <i class="fa-solid fa-right-to-bracket mr-1"></i>
+          <span>Masuk Aplikasi</span>
         </button>
+
+        <p class="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 pt-1">
+          <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+          Cloud Database Synchronized • Authorized Access Only
+        </p>
 
       </div>
     </div>
@@ -887,7 +940,8 @@
         <div
           class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-200/70 px-4 py-2.5 rounded-xl">
           <div class="text-xs font-semibold text-slate-700">
-            Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Laporan Harian (Hari Ini)</span>
+            Menampilkan Data: <span id="activeReportFilterLabel" class="text-blue-700 font-bold">Laporan Harian (Hari
+              Ini)</span>
           </div>
           <button onclick="applyReportFilter('all')"
             class="text-xs font-semibold text-slate-600 hover:text-slate-900 bg-white px-3 py-1 rounded-lg border border-slate-300 w-fit">
@@ -1433,6 +1487,19 @@
           errEl.classList.remove('hidden');
         })
         .loginUser(u, p);
+    }
+
+    function toggleLoginPasswordVisibility() {
+      const pwdInput = document.getElementById('loginPassword');
+      const icon = document.getElementById('loginPasswordToggleIcon');
+      if (!pwdInput || !icon) return;
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        icon.className = 'fa-solid fa-eye text-xs text-blue-400';
+      } else {
+        pwdInput.type = 'password';
+        icon.className = 'fa-solid fa-eye-slash text-xs text-slate-400';
+      }
     }
 
     function toggleMobileSidebar(isOpen) {
