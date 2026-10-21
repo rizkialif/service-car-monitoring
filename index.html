@@ -1171,6 +1171,61 @@
     let editingOrderId = null;
 
     // =========================================================================
+    // ENKRIPSI & DEKRIPSI SESI LOCALSTORAGE (KEAMANAN DATA USER TANPA DEPENDENSI)
+    // =========================================================================
+    const SESSION_CIPHER_KEY = 'CHERY_ARTHA_KRANJI_AUTOCARE_V3_SECURE_TOKEN';
+
+    function encryptSessionData(plainText) {
+      if (!plainText) return '';
+      try {
+        const textBytes = new TextEncoder().encode(plainText);
+        const keyBytes = new TextEncoder().encode(SESSION_CIPHER_KEY);
+        const encryptedBytes = new Uint8Array(textBytes.length);
+
+        for (let i = 0; i < textBytes.length; i++) {
+          encryptedBytes[i] = textBytes[i] ^ keyBytes[i % keyBytes.length] ^ ((i * 37 + 19) & 0xFF);
+        }
+
+        let binary = '';
+        for (let i = 0; i < encryptedBytes.length; i++) {
+          binary += String.fromCharCode(encryptedBytes[i]);
+        }
+        return 'ENC_' + btoa(binary);
+      } catch (e) {
+        console.error('Session encryption failed', e);
+        return plainText;
+      }
+    }
+
+    function decryptSessionData(cipherText) {
+      if (!cipherText) return null;
+      // Fallback kompatibilitas jika data sesi masih dalam format plain JSON
+      if (!cipherText.startsWith('ENC_')) {
+        return cipherText;
+      }
+
+      try {
+        const base64 = cipherText.slice(4);
+        const binary = atob(base64);
+        const encryptedBytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          encryptedBytes[i] = binary.charCodeAt(i);
+        }
+
+        const keyBytes = new TextEncoder().encode(SESSION_CIPHER_KEY);
+        const decryptedBytes = new Uint8Array(encryptedBytes.length);
+        for (let i = 0; i < encryptedBytes.length; i++) {
+          decryptedBytes[i] = encryptedBytes[i] ^ keyBytes[i % keyBytes.length] ^ ((i * 37 + 19) & 0xFF);
+        }
+
+        return new TextDecoder().decode(decryptedBytes);
+      } catch (e) {
+        console.error('Session decryption failed', e);
+        return null;
+      }
+    }
+
+    // =========================================================================
     // HELPER PENYIMPANAN SESI USER & AUTO-EXPIRED SETELAH PUKUL 00.00 (GANTI HARI)
     // =========================================================================
     function getTodayDateString() {
@@ -1192,7 +1247,9 @@
         loginTime: new Date().toLocaleTimeString('id-ID'),
         timestamp: Date.now()
       };
-      localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(sessionData));
+      const plainStr = JSON.stringify(sessionData);
+      const encrypted = encryptSessionData(plainStr);
+      localStorage.setItem(SESSION_STORAGE_KEY, encrypted);
     }
 
     function getValidSavedSession() {
@@ -1200,7 +1257,13 @@
       if (!savedSessionRaw) return null;
 
       try {
-        const parsed = JSON.parse(savedSessionRaw);
+        const decryptedStr = decryptSessionData(savedSessionRaw);
+        if (!decryptedStr) {
+          localStorage.removeItem(SESSION_STORAGE_KEY);
+          return null;
+        }
+
+        const parsed = JSON.parse(decryptedStr);
         if (!parsed) return null;
 
         // Mendukung format baru (berisi .user dan .loginDate) dan format lawas
@@ -1233,7 +1296,9 @@
       const savedSessionRaw = localStorage.getItem(SESSION_STORAGE_KEY);
       if (savedSessionRaw) {
         try {
-          const parsed = JSON.parse(savedSessionRaw);
+          const decryptedStr = decryptSessionData(savedSessionRaw);
+          if (!decryptedStr) return;
+          const parsed = JSON.parse(decryptedStr);
           if (parsed && parsed.loginDate && parsed.loginDate !== today) {
             handleLogout();
             showToast('Sesi login Anda telah berakhir (melewati pukul 00:00). Silakan login kembali.', false);
